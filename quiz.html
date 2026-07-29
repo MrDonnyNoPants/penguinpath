@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find your Linux distro — PenguinPath</title>
+<meta name="description" content="Answer four quick questions and get a Linux distro recommendation, explained in plain English, plus how to actually install it.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+  <header class="hero quiz-hero">
+    <div class="container">
+      <a class="back-link" href="index.html">&larr; PenguinPath</a>
+      <h1>Which <span class="accent">distro</span> fits you?</h1>
+      <p class="tagline">Four quick questions. No jargon, no account, no catch.</p>
+    </div>
+  </header>
+
+  <main class="container quiz-main">
+    <div id="progress" class="progress"></div>
+    <form id="quiz-form"></form>
+    <div id="result" class="result" hidden></div>
+  </main>
+
+  <script src="distros.js"></script>
+  <script src="quiz.js"></script>
+</body>
+</html>

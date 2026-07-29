@@ -116,6 +116,17 @@ h1 {
   background: var(--border);
 }
 
+.status-live {
+  color: var(--accent);
+  background: var(--accent-dim);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.status-live:hover {
+  filter: brightness(1.1);
+}
+
 .roadmap {
   padding-bottom: 72px;
 }

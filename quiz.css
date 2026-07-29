@@ -1,0 +1,172 @@
+.quiz-hero {
+  padding: 56px 0 32px;
+  text-align: left;
+}
+
+.back-link {
+  color: var(--ink-dim);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.quiz-hero h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  margin: 16px 0 8px;
+}
+
+.quiz-hero .tagline {
+  margin: 0;
+  text-align: left;
+  max-width: none;
+}
+
+.quiz-main {
+  padding-bottom: 72px;
+}
+
+.progress {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.progress-dot {
+  width: 28px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+}
+
+.progress-dot.done { background: var(--accent); }
+.progress-dot.active { background: var(--accent-dim); }
+
+.question {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 0 0 16px;
+  background: var(--bg-alt);
+}
+
+.question.answered {
+  opacity: 0.55;
+}
+
+.question legend {
+  font-weight: 600;
+  padding: 0 4px 14px;
+  font-size: 1.02rem;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: var(--bg);
+}
+
+.option input {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+
+.result-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  background: var(--bg-alt);
+  border-top: 3px solid var(--distro-accent, var(--accent));
+}
+
+.result-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+}
+
+.result-card h2 {
+  margin: 6px 0 4px;
+  font-size: 1.8rem;
+}
+
+.result-tagline {
+  color: var(--distro-accent, var(--accent));
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+
+.result-why {
+  color: var(--ink-dim);
+  margin: 0 0 20px;
+}
+
+.download-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #06110c;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.download-btn:hover {
+  filter: brightness(1.08);
+}
+
+.install-guide {
+  margin-top: 28px;
+}
+
+.install-guide h3 {
+  font-size: 1.1rem;
+}
+
+.install-guide ol {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.install-guide li {
+  color: var(--ink);
+}
+
+.install-guide a {
+  color: var(--accent);
+}
+
+.install-note {
+  color: var(--ink-dim);
+  font-size: 0.85rem;
+  margin-top: 16px;
+}
+
+.retake-btn {
+  margin-top: 24px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--ink-dim);
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.retake-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
