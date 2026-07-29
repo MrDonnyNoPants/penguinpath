@@ -27,10 +27,16 @@ function renderQuiz() {
     const isNext = index === Object.keys(answers).length;
     if (!isAnswered && !isNext) return;
 
-    const fieldset = document.createElement('fieldset');
-    fieldset.className = 'question' + (isAnswered ? ' answered' : '');
+    const promptId = `${question.id}-prompt`;
 
-    const legend = document.createElement('legend');
+    const fieldset = document.createElement('div');
+    fieldset.className = 'question' + (isAnswered ? ' answered' : '');
+    fieldset.setAttribute('role', 'radiogroup');
+    fieldset.setAttribute('aria-labelledby', promptId);
+
+    const legend = document.createElement('div');
+    legend.className = 'question-prompt';
+    legend.id = promptId;
     legend.textContent = question.prompt;
     fieldset.appendChild(legend);
 
