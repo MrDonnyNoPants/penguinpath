@@ -57,6 +57,39 @@ h1 {
   color: var(--ink-dim);
 }
 
+.explainer-toggle {
+  margin-top: 12px;
+  background: none;
+  border: none;
+  color: var(--ink-dim);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.explainer-toggle:hover {
+  color: var(--accent);
+}
+
+.explainer-panel {
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+  max-width: 640px;
+}
+
+.explainer-row {
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  line-height: 1.5;
+}
+
+.explainer-row strong {
+  color: var(--ink);
+  margin-right: 6px;
+}
+
 main {
   padding: 24px 28px 40px;
   max-width: 860px;
@@ -86,14 +119,6 @@ main {
 .results {
   display: grid;
   gap: 20px;
-}
-
-.source-group h2 {
-  font-size: 0.95rem;
-  margin: 0 0 10px;
-  color: var(--ink-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .result-list {
@@ -171,6 +196,53 @@ main {
 
 .copy-btn:hover {
   filter: brightness(1.1);
+}
+
+.picker-label {
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+  margin-top: 8px;
+}
+
+.source-picker {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.picker-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--ink-dim);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.picker-btn:hover {
+  border-color: var(--accent-dim);
+}
+
+.picker-btn.active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.single-source-tag {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.detail-area {
+  margin-top: 4px;
 }
 
 .empty-note, .error-note {

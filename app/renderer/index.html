@@ -9,6 +9,8 @@
   <header>
     <h1>Penguin<span class="accent">Path</span></h1>
     <div id="sources" class="sources">Checking installed package managers…</div>
+    <button id="explainer-toggle" class="explainer-toggle" type="button">What's the difference between these?</button>
+    <div id="explainer-panel" class="explainer-panel" hidden></div>
   </header>
 
   <main>
@@ -19,6 +21,7 @@
     <div id="results" class="results"></div>
   </main>
 
+  <script src="explainers.js"></script>
   <script src="renderer.js"></script>
 </body>
 </html>
