@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Linux apps — PenguinPath</title>
+<meta name="description" content="Search across apt, flatpak, and snap in one place, with plain-English descriptions and the exact install command for whichever one you pick.">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="search.css">
+<script data-goatcounter="https://penguinpath.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+  <header class="hero search-hero">
+    <div class="container">
+      <a class="back-link" href="index.html">&larr; PenguinPath</a>
+      <h1>Search Linux <span class="accent">apps</span></h1>
+      <p class="tagline">One box, apt + flatpak + snap. Pick a source, get the install command.</p>
+    </div>
+  </header>
+
+  <main class="container search-main">
+    <div class="search-row">
+      <input id="search-input" type="text" placeholder="Search for an app (e.g. gimp, vlc, obs)" autofocus>
+    </div>
+    <p id="hint" class="hint">Type at least 2 characters to search.</p>
+    <p class="apt-note">apt results are a static snapshot (not live) until the desktop app's Pi-hosted backend is ready — <span id="apt-snapshot-date"></span></p>
+    <div id="results" class="results"></div>
+  </main>
+
+  <script src="search.js"></script>
+</body>
+</html>

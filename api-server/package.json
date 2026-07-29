@@ -1,0 +1,6 @@
+{
+  "name": "penguinpath-api",
+  "version": "0.0.1",
+  "private": true,
+  "description": "PenguinPath website search API -- Flathub + Snapcraft live search, apt via a static snapshot until the Pi backend is ready"
+}
