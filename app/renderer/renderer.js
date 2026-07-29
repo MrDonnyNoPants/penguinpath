@@ -83,7 +83,15 @@ function groupResults(sources, results) {
     if (!sources[sourceKey]) continue;
     for (const item of results[sourceKey] || []) {
       const itemKeys = candidateKeys(sourceKey, item);
-      const match = groups.find((g) => itemKeys.some((ik) => g.keys.some((gk) => keysRelated(ik, gk))));
+      // Only merge across DIFFERENT sources -- a group already containing an
+      // apt entry must never absorb a second, unrelated apt entry just because
+      // the names overlap (e.g. apt's "gimp" and "gimp-data" are distinct
+      // packages, not the same app via a different source).
+      const match = groups.find(
+        (g) =>
+          !g.entries.some((e) => e.source === sourceKey) &&
+          itemKeys.some((ik) => g.keys.some((gk) => keysRelated(ik, gk)))
+      );
 
       if (match) {
         match.keys.push(...itemKeys);
