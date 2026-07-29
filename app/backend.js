@@ -13,6 +13,27 @@ async function commandExists(cmd) {
   }
 }
 
+// apt-cache in particular matches term against name AND description with no
+// relevance ranking, so a search for "vlc" can return "ani-cli" first because
+// its description happens to mention something tangential. Re-rank client-side:
+// exact name match, then name-starts-with, then name-contains, then
+// description-only matches last -- applied to all sources for consistency.
+function relevanceRank(term, name) {
+  const t = term.toLowerCase();
+  const n = name.toLowerCase();
+  if (n === t) return 0;
+  if (n.startsWith(t)) return 1;
+  if (n.includes(t)) return 2;
+  return 3;
+}
+
+function sortByRelevance(term, items) {
+  return items
+    .map((item, i) => ({ item, i, rank: relevanceRank(term, item.name) }))
+    .sort((a, b) => a.rank - b.rank || a.i - b.i)
+    .map((x) => x.item);
+}
+
 async function detectSources() {
   const [apt, flatpak, snap] = await Promise.all([
     commandExists('apt-cache'),
@@ -24,7 +45,7 @@ async function detectSources() {
 
 async function searchApt(term) {
   const { stdout } = await execFileAsync('apt-cache', ['search', term], { maxBuffer: MAX_BUFFER });
-  return stdout
+  const items = stdout
     .split('\n')
     .filter(Boolean)
     .map((line) => {
@@ -33,13 +54,14 @@ async function searchApt(term) {
       const description = idx === -1 ? '' : line.slice(idx + 3);
       return { name, description, installCommand: `sudo apt install ${name}` };
     });
+  return sortByRelevance(term, items);
 }
 
 async function searchFlatpak(term) {
   const { stdout } = await execFileAsync('flatpak', ['search', term], { maxBuffer: MAX_BUFFER });
   const lines = stdout.split('\n').filter(Boolean);
   if (lines.length && /^Name\s/.test(lines[0])) lines.shift();
-  return lines.map((line) => {
+  const items = lines.map((line) => {
     const cols = line.split('\t');
     const name = cols[0] || '';
     const id = cols[2] || '';
@@ -51,13 +73,14 @@ async function searchFlatpak(term) {
       installCommand: `flatpak install ${remote} ${id}`,
     };
   });
+  return sortByRelevance(term, items);
 }
 
 async function searchSnap(term) {
   const { stdout } = await execFileAsync('snap', ['find', term], { maxBuffer: MAX_BUFFER });
   const lines = stdout.split('\n').filter(Boolean);
   if (lines.length && /^Name\s/.test(lines[0])) lines.shift();
-  return lines.map((line) => {
+  const items = lines.map((line) => {
     const parts = line.trim().split(/\s{2,}/);
     const name = parts[0] || '';
     return {
@@ -68,6 +91,7 @@ async function searchSnap(term) {
       installCommand: `sudo snap install ${name}`,
     };
   });
+  return sortByRelevance(term, items);
 }
 
 module.exports = { detectSources, searchApt, searchFlatpak, searchSnap };
