@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PenguinPath</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Penguin<span class="accent">Path</span></h1>
+    <div id="sources" class="sources">Checking installed package managers…</div>
+  </header>
+
+  <main>
+    <div class="search-row">
+      <input id="search-input" type="text" placeholder="Search for an app (e.g. gimp, vlc, obs)" autofocus>
+    </div>
+    <p id="hint" class="hint">Type at least 2 characters to search.</p>
+    <div id="results" class="results"></div>
+  </main>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

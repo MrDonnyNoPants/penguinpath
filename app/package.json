@@ -1,0 +1,13 @@
+{
+  "name": "penguinpath-app",
+  "version": "0.0.1",
+  "private": true,
+  "description": "PenguinPath desktop app — unified search across apt, flatpak, and snap",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^43.2.0"
+  }
+}
