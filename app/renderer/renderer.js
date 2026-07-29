@@ -45,34 +45,56 @@ explainerToggle.addEventListener('click', () => {
   explainerToggle.setAttribute('aria-expanded', String(willShow));
 });
 
-function flatpakShortName(item) {
-  if (!item.id) return item.name.toLowerCase();
-  const parts = item.id.split('.');
-  return parts[parts.length - 1].toLowerCase();
+// Generic ID-segment endings that would cause false matches if used alone
+// (e.g. flatpak "org.example.Client" shouldn't merge with apt's "thin-client").
+const GENERIC_ID_SEGMENTS = new Set([
+  'app', 'client', 'desktop', 'gui', 'tool', 'launcher', 'suite', 'edition', 'studio', 'manual',
+]);
+
+function normalizeIdentifier(str) {
+  return str.toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
-function groupKey(sourceKey, item) {
-  if (sourceKey === 'flatpak') return flatpakShortName(item);
-  return item.name.toLowerCase();
+// Identifier-like keys only (package names, flatpak's reverse-DNS ID segment) —
+// deliberately excludes flatpak's free-text display name, since substring-matching
+// against a long descriptive name causes false merges (e.g. "GIMP User Manual"
+// would otherwise wrongly merge into the main "gimp" app, since its normalized
+// name contains "gimp" as a substring).
+function candidateKeys(sourceKey, item) {
+  const keys = [];
+  if (sourceKey === 'flatpak' && item.id) {
+    const parts = item.id.split('.');
+    const segment = normalizeIdentifier(parts[parts.length - 1]);
+    if (segment && !GENERIC_ID_SEGMENTS.has(segment)) keys.push(segment);
+  } else {
+    keys.push(normalizeIdentifier(item.name));
+  }
+  return keys.filter((k) => k.length >= 4);
+}
+
+function keysRelated(a, b) {
+  return a === b || a.includes(b) || b.includes(a);
 }
 
 function groupResults(sources, results) {
-  const groups = new Map();
-  const order = [];
+  const groups = [];
 
   for (const sourceKey of SOURCE_ORDER) {
     if (!sources[sourceKey]) continue;
     for (const item of results[sourceKey] || []) {
-      const key = groupKey(sourceKey, item);
-      if (!groups.has(key)) {
-        groups.set(key, { key, entries: [] });
-        order.push(key);
+      const itemKeys = candidateKeys(sourceKey, item);
+      const match = groups.find((g) => itemKeys.some((ik) => g.keys.some((gk) => keysRelated(ik, gk))));
+
+      if (match) {
+        match.keys.push(...itemKeys);
+        match.entries.push({ source: sourceKey, item });
+      } else {
+        groups.push({ keys: itemKeys, entries: [{ source: sourceKey, item }] });
       }
-      groups.get(key).entries.push({ source: sourceKey, item });
     }
   }
 
-  return order.map((key) => groups.get(key));
+  return groups;
 }
 
 function displayName(group) {
