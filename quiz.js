@@ -130,8 +130,10 @@ function showResult() {
     progressEl.hidden = false;
     renderProgress();
     renderQuiz();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   });
+
+  window.scrollTo(0, 0);
 }
 
 trackEvent('/quiz/start');
