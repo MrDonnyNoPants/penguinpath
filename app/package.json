@@ -1,13 +1,30 @@
 {
   "name": "penguinpath-app",
   "version": "0.0.1",
+  "homepage": "https://getpenguinpath.com",
+  "author": {
+    "name": "MrDonnyNoPants",
+    "email": "thedonsimmer@gmail.com"
+  },
   "private": true,
-  "description": "PenguinPath desktop app — unified search across apt, flatpak, and snap",
+  "description": "PenguinPath desktop app -- unified search across apt, flatpak, and snap",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder"
   },
   "devDependencies": {
-    "electron": "^43.2.0"
+    "electron": "^43.2.0",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.penguinpath.app",
+    "productName": "PenguinPath",
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "category": "Utility",
+      "icon": "build/icon.png",
+      "syncDesktopName": true
+    }
   }
 }
