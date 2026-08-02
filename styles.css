@@ -36,8 +36,8 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 18px;
+  padding-bottom: 16px;
 }
 
 .site-nav-link {
