@@ -124,6 +124,10 @@ function showResult() {
         <li><strong>Follow the installer.</strong> You'll be asked to erase the disk (replaces everything) or install alongside your current OS (dual-boot, keeps both). Pick whichever fits what you want, then follow the prompts.</li>
       </ol>
       <p class="install-note">This isn't ${distro.name}-specific advice beyond the download link — the USB/boot process above is the same for nearly every Linux distro.</p>
+        <p class="install-note">
+          Curious why this fits you specifically? Read <a href="learn.html?topic=picking-a-distro">picking a distro, explained</a>.
+          Once it's installed, here's <a href="learn.html?topic=installing-your-first-app">how to install your first app</a>.
+        </p>
     </div>
 
     <button id="retake-btn" class="retake-btn" type="button">Take the quiz again</button>
