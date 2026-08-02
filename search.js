@@ -98,6 +98,12 @@ function buildGroupCard(group) {
     label.className = 'install-label';
     label.textContent = `Run this to install it via ${SOURCE_LABELS[source]}:`;
     detailArea.appendChild(label);
+    
+    const learnLink = document.createElement('a');
+    learnLink.className = 'install-help';
+    learnLink.href = 'learn.html?topic=package-managers-explained';
+    learnLink.textContent = 'New to apt/flatpak/snap? Read what they actually mean →';
+    detailArea.appendChild(learnLink);
 
     const row = document.createElement('div');
     row.className = 'install-panel';
