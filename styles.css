@@ -31,7 +31,7 @@
   background: var(--bg-alt);
 }
 
-.site-nav-inner {
+.site-nav .site-nav-inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
