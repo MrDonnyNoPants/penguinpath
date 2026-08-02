@@ -13,7 +13,7 @@ const TOPICS = [
       },
       {
         type: "p",
-        text: "Every operating system has one under the hood - Linux just puts it in front and center more often, because a lot of software (including package managers like apt, covered in the next lesson) is easiest to install and troubleshoot through it. You'll open one for lass than you'd expect once your system is set up.",
+        text: "Every operating system has one under the hood - Linux just puts it in front and center more often, because a lot of software (including package managers like apt, covered in the next lesson) is easiest to install and troubleshoot through it. You'll open one for less than you'd expect once your system is set up.",
       },
       {
         type: "list",
