@@ -21,7 +21,7 @@ function renderNav() {
         const link = document.createElement('a');
         link.href = href;
         link.textContent = label;
-        link.className = 'site-nav-link' + (href === currentPage ? 'active' : '');
+        link.className = 'site-nav-link' + (href === currentPage ? ' active' : '');
         inner.appendChild(link);
     });
 
