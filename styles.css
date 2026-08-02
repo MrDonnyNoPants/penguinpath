@@ -221,3 +221,16 @@ footer.container {
   color: var(--ink-dim);
   font-size: 0.85rem;
 }
+
+.install-help {
+  display: inline-block;
+  margin: 4px 0 12px;
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.install-help:hover {
+  text-decoration: underline;
+}
+
