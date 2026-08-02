@@ -10,6 +10,8 @@
         async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
+  <div id="site-nav"></div>
+  <script src="nav.js"></script>
   <header class="hero">
     <div class="container">
       <div class="badge">Coming soon</div>
@@ -31,6 +33,11 @@
 
     <section class="container features">
       <div class="feature-card">
+        <h2>Learn as you go</h2>
+        <p>Ten short, plain-English lessons — from what a terminal is to picking a distro — with a guided path for first-timers and a browsable reference for everyone else.</p>
+        <a class="status status-live" href="learn.html">Start learning &rarr;</a>
+      </div>
+      <div class="feature-card">
         <h2>Unified search</h2>
         <p>One search box across apt, flatpak, and snap — instead of three separate tools with three different mental models.</p>
         <a class="status status-live" href="search.html">Try the search &rarr;</a>
@@ -38,7 +45,7 @@
       <div class="feature-card">
         <h2>Plain-English explainers</h2>
         <p>When two package formats offer the same app, know what actually differs before you pick one.</p>
-        <span class="status status-live">Live</span>
+        <a class="status status-live" href="learn.html?topic=package-managers-explained">Read the explainer &rarr;</a>
       </div>
       <div class="feature-card">
         <h2>Guided first steps</h2>
@@ -54,6 +61,7 @@
         <li class="done">Distro quiz — live</li>
         <li class="done">Website search (apt snapshot + live flatpak/snap) — live</li>
         <li class="done">Desktop app backend — done (search, cross-source picker, explainers)</li>
+        <li class="done">Learn section (10 guided lessons + reference library) — live</li>
         <li class="active">Packaged desktop app — built and tested (AppImage + .deb), not yet downloadable here</li>
       </ol>
       <p class="roadmap-note">

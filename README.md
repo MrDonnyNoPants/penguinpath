@@ -21,6 +21,7 @@ Someone coming to Linux from Windows or macOS wants to install an app and hits a
 ## Repo layout
 
 - `index.html`, `styles.css` — the landing page (root of this repo, served via GitHub Pages)
+- `learn.html`, `learn.js`, `learn.css`, `learn-content.js` — the Learn section: a guided "Start Here" path plus a browsable reference library of plain-English Linux lessons.
 - `app/` — the Electron application (work in progress)
 
 ## License
