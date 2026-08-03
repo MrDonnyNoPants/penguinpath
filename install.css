@@ -47,7 +47,8 @@
   font-size: 1.8rem;
   margin: 0 0 8px;
   border-bottom: 3px solid var(--guide-accent, var(--accent));
-  display: inline-block;
+  display: block;
+  width: fit-content;
   padding-bottom: 4px;
 }
 
