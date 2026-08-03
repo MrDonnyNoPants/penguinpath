@@ -11,7 +11,7 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: "Go to linuxmint.com/download.php . You'll see three editions - Cinnamon, MATE, and Xfce. If you're not sure which one, pick Cinnamon: it's the default, most polished, and what most guides (including this one) assume.",
+            text: "Go to linuxmint.com/download.php. You'll see three editions - Cinnamon, MATE, and Xfce. If you're not sure which one, pick Cinnamon: it's the default, most polished, and what most guides (including this one) assume.",
           },
           {
             type: "p",
