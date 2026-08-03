@@ -11,11 +11,11 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: "Go to linuxmint.com/download.php . You'll see three editions - Cinnamon, MATE, and Xfce. If you're not sure which one, pick Cinnamon: 's the default, most polished, and what most guides (including this one) assume.",
+            text: "Go to linuxmint.com/download.php . You'll see three editions - Cinnamon, MATE, and Xfce. If you're not sure which one, pick Cinnamon: it's the default, most polished, and what most guides (including this one) assume.",
           },
           {
             type: "p",
-            text: "Click Cinnamon, then pick a mirror close to your location (any of them work - closer just means a faster download). The file that downloads is the IDO - a single file, usually 2-3GB, that contains the entire installer and operating system.",
+            text: "Click Cinnamon, then pick a mirror close to your location (any of them work - closer just means a faster download). The file that downloads is the ISO - a single file, usually 2-3GB, that contains the entire installer and operating system.",
           },
           {
             type: "list",
@@ -37,14 +37,14 @@ const INSTALL_GUIDES = [
           },
           {
             type: "p",
-            text: "Download balenaEtcher (balena.io/etcher) - it's freeand works on Windows, Mac, and Linux. Install it and open it.",
+            text: "Download balenaEtcher (balena.io/etcher) - it's free and works on Windows, Mac, and Linux. Install it and open it.",
           },
           {
             type: "list",
             items: [
               'Click "Flash from file" and select the Mint ISO you downloaded.',
               'Click "Select target" and choose your USB drive - double-check you\'ve picked the right one, since this step erases it.',
-              'Click "Flash" and wait. It usually takes 5-15 minutes depending on the USB drive\'s speed.',
+              'Click "Flash!" and wait. It usually takes 5-15 minutes depending on the USB drive\'s speed.',
             ],
           },
           {
@@ -75,11 +75,11 @@ const INSTALL_GUIDES = [
           },
           {
             type: "p",
-            text: "If you're not sure which key, watch closely during the very first second of startup - many computersbriefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
+            text: "If you're not sure which key, watch closely during the very first second of startup - many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
           },
           {
             type: "p",
-            text: "From the the boot menu,, select your USB drive (it'll usually show the brand name of the drive, not \"Linux Mint\"). Your computer will boot into a live version of Linux Mint - you're now running it directly off the USB, nothing is installed yet.",
+            text: "From the boot menu, select your USB drive (it'll usually show the brand name of the drive, not \"Linux Mint\"). Your computer will boot into a live version of Linux Mint - you're now running it directly off the USB, nothing is installed yet.",
           },
           {
             type: "p",
