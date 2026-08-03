@@ -3,6 +3,7 @@ const NAV_LINKS = [
     { href: 'learn.html', label: 'Learn' },
     { href: 'search.html', label: 'Search' },
     { href: 'quiz.html', label: 'Quiz' },
+    { href: 'install.html', label: 'Install' },
 ];
 
 function renderNav() {
