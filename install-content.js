@@ -6094,4 +6094,577 @@ const INSTALL_GUIDES = [
       },
     ],
   },
+  {
+    slug: "kali-linux",
+    name: "Kali Linux",
+    accent: "#1e3a5f",
+    tagline: "A Debian-based distro built for security research and penetration testing — not a general daily driver",
+    summary: "Full install walkthrough, start to finish.",
+    steps: [
+      {
+        title: "Download the ISO",
+        summary:
+          "Grab the Kali Linux installer file from the official site — but understand what Kali is actually for first.",
+        detail: [
+          {
+            type: "p",
+            text: "Before downloading anything: Kali Linux is a Debian-based distro built specifically for penetration testing, digital forensics, and security research. It comes with hundreds of security tools pre-installed. It's not designed to be a general everyday desktop the way most distros on this site are — if you're looking for a daily driver for browsing, email, and office work, something like Linux Mint or Zorin OS is a much better fit. This guide is for people who specifically want Kali for security work.",
+          },
+          {
+            type: "p",
+            text: "The install process itself is genuinely straightforward — Kali uses the same Debian-installer used by Debian itself elsewhere on this site — so the steps below aren't more advanced than the rest of this guide, just aimed at a different purpose.",
+          },
+          {
+            type: "p",
+            text: "Kali offers several download categories on its site — installer images, live-boot images, virtual machine images, ARM images, and more. This guide covers the standard offline Installer image, currently kali-linux-2026.2-installer-amd64.iso, around 4.5GB.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Go to kali.org/get-kali/",
+              "Under Installer Images, download the standard Installer (amd64) ISO",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Don't extract or open the ISO after downloading — it gets used as-is in the next step.",
+              "There's also a smaller NetInstaller image that downloads packages during setup instead of including them all upfront, and an Everything image for installs with no internet access — the standard Installer image is the simplest choice for most people.",
+              "A separate Live Boot image exists too, for trying Kali from the USB without installing anything — this guide covers the full install, not the live/try-it-first path.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Create a bootable USB",
+        summary:
+          "Turn a USB drive into something your computer can install Kali Linux from.",
+        detail: [
+          {
+            type: "p",
+            text: "You'll need a USB drive that's at least 8GB — Kali's own documentation specifically recommends this larger minimum over the 4GB that's often enough for other distros. Back up anything on the drive first, since this process erases it completely.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the Kali ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
+            ],
+          },
+          {
+            type: "p",
+            text: "When it finishes, Etcher will say the flash succeeded and safely eject the drive. Leave it plugged in — you'll boot from it in the next step.",
+          },
+        ],
+      },
+      {
+        title: "Boot into the installer",
+        summary:
+          "Restart your computer, start up from the USB, and choose Graphical Install from Kali's boot menu.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              'Select your USB drive from the boot menu (it\'ll show the drive\'s brand name, not "Kali")',
+              'On the Kali boot menu that appears, select "Graphical install" and press Enter',
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Dell: F12",
+              "HP: F9 or Esc",
+              "Lenovo: F12 or the Novo button",
+              "ASUS: F8 or Esc",
+              "Acer: F12",
+              "Mac: hold Option/Alt at startup",
+            ],
+          },
+          {
+            type: "p",
+            text: "If you're not sure which key, watch closely during the very first second of startup — many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
+          },
+          {
+            type: "p",
+            text: 'Unlike most distros on this site, Kali\'s boot menu shows several options at once — "Live", "Install", "Graphical install", and more — rather than dropping you straight into one. Choosing "Graphical install" is what launches the point-and-click installer this guide follows; "Install" runs the same installer in text-only mode instead.',
+          },
+        ],
+      },
+      {
+        title: "Choose how to install",
+        summary:
+          "Work through the installer's early screens, then erase the disk for a single-OS install.",
+        detail: [
+          {
+            type: "p",
+            text: "This checklist covers the full, single-OS install — where Kali becomes the only operating system on the drive.",
+          },
+          {
+            type: "p",
+            text: "Important: this permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else before continuing.",
+          },
+          {
+            type: "p",
+            text: "If you want to keep your existing operating system and choose between the two each time you start your computer, that's dual-boot — a different process with its own separate guide, not covered by this walkthrough.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Select your language, then your location, then your keyboard layout, clicking Continue after each",
+              "Enter a hostname (a name for this computer) when asked — anything works, like \"kali\"",
+              "Leave the domain name field blank unless you specifically know you need one, then Continue",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Follow the installer prompts",
+        summary:
+          "Create your account, confirm the disk, pick your tools, and let it install.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Create your account: your full name, a username, and a password",
+              "Confirm your timezone",
+              'On the partitioning screen, select "Guided - use entire disk", then select your drive',
+              'Select "All files in one partition" (the simplest option) when asked how to partition, then confirm "Finish partitioning and write changes to disk" and confirm again to apply',
+            ],
+          },
+          {
+            type: "p",
+            text: "Remember your password — it's what you'll use both to log in and for sudo afterward. Kali doesn't set a separate root password during this process, the same sudo-based setup used throughout this site.",
+          },
+          {
+            type: "p",
+            text: 'Next, you may be asked about a network mirror — it\'s safe to accept the default (yes) so you can install updates later. You\'ll then reach a software selection screen listing "metapackages" — collections of tools grouped by purpose. Leave kali-linux-default selected (it\'s the standard option, checked by default) unless you already know you want a different toolset; it installs the default Xfce desktop plus Kali\'s standard set of security tools.',
+          },
+          {
+            type: "checklist",
+            items: [
+              "Confirm your software selection to continue",
+              "When asked about the GRUB bootloader, select Yes to install it, then select the drive you're installing to (not a partition)",
+            ],
+          },
+          {
+            type: "p",
+            text: "After confirming these, the installer copies files and installs your selected tools — this can take longer than other distros on this site, often 20-40 minutes, since it's installing considerably more software by default.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Restart when prompted, and remove the USB drive as the screen goes black — leaving it in can boot you back into the installer instead of your new system",
+            ],
+          },
+        ],
+      },
+      {
+        title: "First boot and updates",
+        summary:
+          "Log in to the Xfce desktop and update from a terminal — Kali doesn't rely on a graphical updater.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Log in with the username and password you set during install",
+              "Open a terminal from the taskbar and run: sudo apt update",
+              "Then run: sudo apt full-upgrade -y",
+            ],
+          },
+          {
+            type: "p",
+            text: "Kali's own documentation recommends apt full-upgrade specifically (rather than the more familiar apt upgrade) — it more reliably handles the dependency changes that come with Kali's frequently-updated security tools. This is also the primary way Kali expects you to update; there's no dedicated graphical update app the way Mint or Zorin have one.",
+          },
+          {
+            type: "p",
+            text: "That's the full install, start to finish. From here, the Learn section's lessons and the Search page pick up the general Linux basics — though getting the most out of Kali specifically means spending time with its own documentation at kali.org/docs, since the tools it ships with are a world of their own beyond what this site covers.",
+          },
+        ],
+      },
+    ],
+    related: [
+      {
+        href: "learn.html?topic=terminal-basics",
+        label: "Next: what a terminal actually is →",
+      },
+    ],
+  },
+  {
+    slug: "alpine-linux",
+    name: "Alpine Linux",
+    accent: "#2d5f4f",
+    tagline: "An extremely minimal, security-focused distro built for servers — desktop use takes real extra work",
+    summary: "Full install walkthrough, start to finish.",
+    steps: [
+      {
+        title: "Download the ISO",
+        summary:
+          "Grab the Alpine Linux ISO — but read this first, because Alpine doesn't give you a desktop by default, or even an installer in the usual sense.",
+        detail: [
+          {
+            type: "p",
+            text: "Before downloading anything: Alpine Linux is built to be as small and minimal as possible, and it's used far more often as a server or container base image than as a desktop OS. There is no graphical installer — setup is a short, text-based interactive script — and, unlike every other distro on this site, a base Alpine install does not include a desktop environment at all. Getting a graphical desktop running is a separate manual step you do yourself after the base install, covered briefly at the end of this guide.",
+          },
+          {
+            type: "p",
+            text: "If you specifically want a lightweight distro for everyday desktop use with real hand-holding, Linux Lite or antiX elsewhere on this site will get you a working desktop with far less manual setup. This guide is for people who want Alpine specifically, understanding that reaching a desktop takes extra steps most distros here don't require.",
+          },
+          {
+            type: "p",
+            text: "Alpine offers three ISO editions. Standard is the bare minimum and needs an internet connection during setup to pull packages. Extended includes more commonly-needed packages plus CPU microcode updates (useful firmware for real hardware) and runs entirely from RAM. Virtual is a slimmed-down build meant for virtual machines, not real hardware. For installing on an actual computer, Extended is the better starting point — it's better prepared for real hardware than Standard.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Go to alpinelinux.org/downloads",
+              "Under the x86_64 downloads, click the Extended edition to download the ISO (currently around 1.4GB)",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Don't extract or open the ISO after downloading — it gets used as-is in the next step.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Create a bootable USB",
+        summary:
+          "Turn a USB drive into something your computer can install Alpine Linux from.",
+        detail: [
+          {
+            type: "p",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the Alpine ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
+            ],
+          },
+          {
+            type: "p",
+            text: "When it finishes, Etcher will say the flash succeeded and safely eject the drive. Leave it plugged in — you'll boot from it in the next step.",
+          },
+        ],
+      },
+      {
+        title: "Boot into the installer",
+        summary:
+          "Restart your computer and boot from the USB — Alpine logs you straight in as root, with no password and no desktop.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              'Select your USB drive from the boot menu (it\'ll show the drive\'s brand name, not "Alpine")',
+              "Wait for it to finish loading — you'll be logged in automatically as root, with no password needed, at a plain command prompt",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Dell: F12",
+              "HP: F9 or Esc",
+              "Lenovo: F12 or the Novo button",
+              "ASUS: F8 or Esc",
+              "Acer: F12",
+              "Mac: hold Option/Alt at startup",
+            ],
+          },
+          {
+            type: "p",
+            text: "If you're not sure which key, watch closely during the very first second of startup — many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
+          },
+          {
+            type: "p",
+            text: "If you're on Wi-Fi rather than a wired connection, connect now before continuing — the setup script pulls packages from the internet. Run setup-interfaces, or connect manually with wpa_supplicant, before moving on.",
+          },
+        ],
+      },
+      {
+        title: "Choose how to install",
+        summary:
+          "Run setup-alpine and answer its prompts — this single script handles the whole base install.",
+        detail: [
+          {
+            type: "p",
+            text: "There's no separate installer program to launch — at the root prompt, you type setup-alpine and press Enter, and a single interactive script walks you through every setup question, one at a time, entirely from the keyboard.",
+          },
+          {
+            type: "p",
+            text: "This checklist covers a straightforward single-OS setup, where Alpine becomes the only operating system on the drive. Dual-boot is possible with more manual partitioning but isn't covered by this walkthrough.",
+          },
+          {
+            type: "p",
+            text: "Important: the disk step later in this script permanently erases everything on the drive you select. Back up anything you want to keep before continuing.",
+          },
+          {
+            type: "checklist",
+            items: ["Type setup-alpine and press Enter to begin"],
+          },
+        ],
+      },
+      {
+        title: "Follow the installer prompts",
+        summary:
+          "Work through setup-alpine's questions — keyboard, network, password, timezone, and finally the disk.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Keyboard layout — enter yours (e.g. us), and the variant if asked",
+              "Hostname — press Enter to accept the default, or type a name for this computer",
+              "Network interface — press Enter to accept the default wired interface and DHCP, unless you already connected to Wi-Fi manually in the previous step",
+              "Set a root password — choose one and remember it",
+              "Timezone — enter yours (e.g. America/New_York)",
+              "Proxy — press Enter for none, unless you specifically use one",
+              "Mirror — press Enter to accept the automatically chosen fastest mirror",
+              "SSH server — press Enter to accept the default (OpenSSH), or type no if you don't want remote access enabled",
+              "NTP client — press Enter to accept the default for automatic clock sync",
+              "Disk to use — type the name of your drive (e.g. sda) when listed",
+              'Disk mode — type sys, which installs Alpine permanently to that disk as a normal, persistent system (as opposed to "data" or "diskless" modes, which set up different, non-standard configurations not covered here)',
+              "Confirm when asked to erase and use the disk",
+            ],
+          },
+          {
+            type: "p",
+            text: "After confirming, Alpine installs the base system to your disk — this is quick compared to most distros on this site, often just a few minutes given how minimal the base system is.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "When it finishes, type reboot, and remove the USB drive as your computer restarts",
+            ],
+          },
+        ],
+      },
+      {
+        title: "First boot and updates",
+        summary:
+          "Log in, create your own user account, update the system — then, if you want one, install a desktop yourself.",
+        detail: [
+          {
+            type: "p",
+            text: "Alpine boots to a plain text login, not a graphical one — that's expected. setup-alpine only set up the root account; there's no personal user account yet, the same as Slackware elsewhere on this site.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Log in as root with the password you set during install",
+              "Create your everyday account by running adduser yourusername and following its prompts",
+              "Add your account to the wheel group for admin access: addgroup yourusername wheel",
+              "Update the system: apk update, then apk upgrade",
+            ],
+          },
+          {
+            type: "p",
+            text: "At this point you have a fully working, updated Alpine system — just with no graphical desktop. If that's all you wanted (for example, using Alpine as a lightweight server), you're done. If you want a graphical desktop, that's a genuinely separate, more involved process: broadly, it means installing a display server and desktop environment (for example, setup-xorg-base followed by apk add xfce4 xfce4-terminal lightdm lightdm-gtk-greeter, then rc-update add lightdm to enable the login screen and reboot), and there are several different combinations of desktop and login manager to choose between. The Alpine wiki (wiki.alpinelinux.org) covers these options in more depth than this guide does.",
+          },
+          {
+            type: "p",
+            text: "That's the full base install, start to finish. From here, the Learn section's lessons and the Search page pick up the general Linux basics — though much of what's specific to getting a usable desktop on Alpine goes beyond what this site covers, given how deliberately minimal it is.",
+          },
+        ],
+      },
+    ],
+    related: [
+      {
+        href: "learn.html?topic=terminal-basics",
+        label: "Next: what a terminal actually is →",
+      },
+    ],
+  },
+  {
+    slug: "artix-linux",
+    name: "Artix Linux",
+    accent: "#5c4a72",
+    tagline: "Arch Linux without systemd — the same rolling-release base, a different init system underneath",
+    summary: "Full install walkthrough, start to finish.",
+    steps: [
+      {
+        title: "Download the ISO",
+        summary:
+          "Grab an Artix graphical ISO — the edition that comes with a desktop and Calamares, Artix's easiest install path.",
+        detail: [
+          {
+            type: "p",
+            text: "Artix Linux is built on the same foundation as Arch, but replaces systemd with a different init system — the part of Linux that starts up services and manages the system in the background. This is Artix's whole reason for existing, and it's a genuinely different, more advanced thing to opt into than most distros on this site. If you're not sure why that matters, it's fine to not need it — CachyOS, Manjaro, or EndeavourOS elsewhere on this site give you the same Arch base with systemd, and a much larger pool of guides and troubleshooting help online, since systemd is what most other distros use.",
+          },
+          {
+            type: "p",
+            text: "Artix offers three kinds of install media: base (text-only, for experienced users), graphical (a preconfigured desktop plus the Calamares installer — the easiest path, and what this guide uses), and community (an even more complete, ready-to-go desktop built by individual Artix developers). This guide uses the graphical edition, since it's the one Artix's own team points beginners toward.",
+          },
+          {
+            type: "p",
+            text: "Artix also lets you choose between four init systems — openrc, runit, s6, and dinit — instead of one default. If you're not sure which to pick, runit and openrc are the two most established and widely used; this guide uses runit.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Go to artixlinux.org/download.php",
+              'Under the "graphical" section, download the Xfce runit ISO (currently around 2GB) — or substitute a different desktop or init system from the same section if you\'d rather',
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Don't extract or open the ISO after downloading — it gets used as-is in the next step.",
+              "Artix's own documentation notes the graphical edition is still a fairly bare-bones install — expect to add more software yourself afterward, similar to Arch itself.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Create a bootable USB",
+        summary:
+          "Turn a USB drive into something your computer can install Artix Linux from.",
+        detail: [
+          {
+            type: "p",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the Artix ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
+            ],
+          },
+          {
+            type: "p",
+            text: "When it finishes, Etcher will say the flash succeeded and safely eject the drive. Leave it plugged in — you'll boot from it in the next step.",
+          },
+        ],
+      },
+      {
+        title: "Boot into the installer",
+        summary:
+          "Restart your computer, boot from the USB, and launch the installer from the live desktop.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              'Select your USB drive from the boot menu (it\'ll show the drive\'s brand name, not "Artix")',
+              "Once the live desktop loads, open the Install icon (on the desktop or in the applications menu) to launch Calamares",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Dell: F12",
+              "HP: F9 or Esc",
+              "Lenovo: F12 or the Novo button",
+              "ASUS: F8 or Esc",
+              "Acer: F12",
+              "Mac: hold Option/Alt at startup",
+            ],
+          },
+          {
+            type: "p",
+            text: "If you're not sure which key, watch closely during the very first second of startup — many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
+          },
+          {
+            type: "p",
+            text: "The graphical ISO boots into a full live Xfce desktop first — wired connections work automatically, and a network manager applet is available in the taskbar if you need to connect to Wi-Fi before installing.",
+          },
+        ],
+      },
+      {
+        title: "Choose how to install",
+        summary:
+          "Decide whether Artix replaces your current OS or lives alongside it.",
+        detail: [
+          {
+            type: "p",
+            text: "During Calamares, you'll reach a screen asking how to install. This checklist covers the full, single-OS install — where Artix becomes the only operating system on the drive.",
+          },
+          {
+            type: "p",
+            text: "Important: this permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else before continuing.",
+          },
+          {
+            type: "p",
+            text: "If you want to keep your existing operating system and choose between the two each time you start your computer, that's dual-boot — a different process with its own separate guide, not covered by this walkthrough.",
+          },
+          {
+            type: "checklist",
+            items: ['Select "Erase disk" (or equivalent) and continue'],
+          },
+        ],
+      },
+      {
+        title: "Follow the installer prompts",
+        summary:
+          "Set your language, keyboard, timezone, and account — then let it install.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Select your language and click Continue",
+              "Select your keyboard layout and click Continue",
+              "Confirm your timezone (usually auto-detected from your internet connection)",
+              "Create your account: your name, a computer name, a username, and a password",
+            ],
+          },
+          {
+            type: "p",
+            text: "Remember your password — it's what you'll use both to log in and for sudo afterward.",
+          },
+          {
+            type: "p",
+            text: "After confirming these, the installer starts copying files — this typically takes 10-20 minutes. You can just wait.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Restart when prompted, and remove the USB drive as the screen goes black — leaving it in can boot you back into the installer instead of your new system",
+            ],
+          },
+        ],
+      },
+      {
+        title: "First boot and updates",
+        summary:
+          "Log in and update with pacman — Artix uses the same package manager as Arch.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Log in with the password you set during install",
+              "Open a terminal and run: sudo pacman -Syu",
+              "Confirm with y when it asks",
+            ],
+          },
+          {
+            type: "p",
+            text: "Artix uses pacman, the exact same package manager as Arch — if you're familiar with Arch already, package management here works identically. What's different is anything involving background services: since there's no systemd, commands like systemctl don't exist here — instead, the specific commands depend on which init system you picked (for example, sv up/sv down for runit, or rc-service for openrc). The Artix wiki (wiki.artixlinux.org) covers each init system's commands in detail.",
+          },
+          {
+            type: "p",
+            text: "That's the full install, start to finish. Like Arch, Artix is a rolling release — there's no separate version upgrade, just regular pacman -Syu updates. From here, the Learn section's lessons and the Search page pick up the general Linux basics — though managing services without systemd is a genuinely different skill you'll pick up mostly from Artix's own documentation as you go.",
+          },
+        ],
+      },
+    ],
+    related: [
+      {
+        href: "learn.html?topic=terminal-basics",
+        label: "Next: what a terminal actually is →",
+      },
+    ],
+  },
 ];
