@@ -5687,4 +5687,411 @@ const INSTALL_GUIDES = [
       },
     ],
   },
+  {
+    slug: "arch-linux",
+    name: "Arch Linux",
+    accent: "#06b6d4",
+    tagline: "The DIY, rolling-release distro you build up from nothing yourself",
+    summary: "Full install walkthrough, start to finish.",
+    steps: [
+      {
+        title: "Download the ISO",
+        summary:
+          "Grab the official Arch Linux ISO — but read this first, because Arch expects more from you than most distros on this site.",
+        detail: [
+          {
+            type: "p",
+            text: "Before downloading anything: Arch Linux is one of the most hands-on distros around. For most of its history it had no installer at all — everything was done manually, from a command prompt. Arch now ships an official guided installer called archinstall, which is what this guide uses, but it's still text-based, still expects you to understand what a disk partition and a bootloader are, and still assumes real comfort typing commands and reading their output. It doesn't hold your hand the way a graphical installer does.",
+          },
+          {
+            type: "p",
+            text: "If this is your first time installing Linux at all, a distro like Linux Mint or Zorin OS is a far gentler place to start. This guide is written for people who specifically want Arch and are ready for that — not as a way to ease into Linux generally. The step structure below matches the rest of this site for consistency, but the steps themselves are genuinely more advanced.",
+          },
+          {
+            type: "p",
+            text: "Arch cuts a fresh install image every month, named something like archlinux-2026.08.01-x86_64.iso — the date in the filename is just the build date, not a version you need to track. The current image is around 1.5GB, noticeably smaller than most distros on this site, because it doesn't include a desktop environment or a live desktop to try before installing — you choose and install a desktop later, inside the installer itself. There's also only one build: Arch is 64-bit (x86_64) only, no 32-bit option.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Go to archlinux.org/download",
+              "Download the current ISO — either via the BitTorrent magnet/torrent link (Arch's own recommended method) or from an HTTP/HTTPS mirror near you",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Don't extract or open the ISO after downloading — it gets used as-is in the next step.",
+              "If you want to verify the download, Arch also publishes SHA256/BLAKE2b checksums and a PGP signature on the download page — worthwhile if you're security-conscious, but safe to skip for a first install.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Create a bootable USB",
+        summary:
+          "Turn a USB drive into something your computer can install Arch Linux from.",
+        detail: [
+          {
+            type: "p",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the Arch Linux ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
+            ],
+          },
+          {
+            type: "p",
+            text: "When it finishes, Etcher will say the flash succeeded and safely eject the drive. Leave it plugged in — you'll boot from it in the next step.",
+          },
+        ],
+      },
+      {
+        title: "Boot into the installer",
+        summary:
+          "Restart your computer and start up from the USB — Arch drops you straight into a command prompt, not a menu or a live desktop.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              "Select your USB drive from the boot menu, then select Arch Linux install medium from the boot loader screen that follows",
+              "Wait for it to finish loading — you'll land directly at a root command prompt with no login required",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Dell: F12",
+              "HP: F9 or Esc",
+              "Lenovo: F12 or the Novo button",
+              "ASUS: F8 or Esc",
+              "Acer: F12",
+              "Mac: hold Option/Alt at startup",
+            ],
+          },
+          {
+            type: "p",
+            text: "If you're not sure which key, watch closely during the very first second of startup — many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
+          },
+          {
+            type: "p",
+            text: "Arch's install media doesn't support Secure Boot at all — if your computer has it enabled, the USB won't boot. Go into your UEFI/BIOS settings first and disable Secure Boot, then try again. You can turn it back on after installing if you want it, but setting that up afterward is a separate, more advanced step this guide doesn't cover.",
+          },
+          {
+            type: "p",
+            text: "A wired ethernet connection works automatically the moment it's plugged in. If you're on Wi-Fi, connect now, before continuing: type iwctl, then inside it run device list to find your wireless device's name (commonly wlan0), station <device> scan, station <device> get-networks, and station <device> connect \"YourNetworkName\" — entering your Wi-Fi password when asked — then type exit. The installer in the next step won't set up Wi-Fi for you.",
+          },
+        ],
+      },
+      {
+        title: "Choose how to install",
+        summary:
+          "Launch archinstall and tell it to erase the whole disk — Arch's version of a single-OS install.",
+        detail: [
+          {
+            type: "p",
+            text: "Nothing launches automatically here — at the prompt, you type archinstall yourself to start Arch's official guided installer. It opens as a single scrollable menu of setup categories (mirrors, disk, bootloader, accounts, and more) that you can visit in whatever order you like, rather than one linear wizard screen after another. This checklist covers a straightforward single-OS setup, where Arch becomes the only operating system on the drive.",
+          },
+          {
+            type: "p",
+            text: "Important: this permanently erases everything on that drive. Back up anything you want to keep before continuing.",
+          },
+          {
+            type: "p",
+            text: "Dual-boot is possible on Arch but involves manually partitioning around your existing OS using archinstall's Manual Partitioning mode (or the regular manual install process) — a more advanced setup not covered by this walkthrough.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Type archinstall and press Enter to launch the installer",
+              "From the menu that appears, select Disk configuration",
+              "Select the drive you want to install to",
+              "Choose \"Use a best-effort default partition layout\" — this automatically partitions and formats the entire selected drive for a single-OS Arch install",
+              "When asked for a filesystem, choose ext4 (Btrfs is offered too, but ext4 is the simpler default for a first install)",
+              "Confirm you want to wipe the drive when prompted",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Follow the installer prompts",
+        summary:
+          "Work through the rest of archinstall's menu — this is where your account, desktop, and everything else gets set up.",
+        detail: [
+          {
+            type: "p",
+            text: "Back at the main menu, a handful of items still need your input before you can install. Most others (language, kernel, swap) can be left on their sensible defaults.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Mirrors and repositories — leave the pre-filled default, it's fine for most people",
+              "Bootloader — leave the default (systemd-boot on UEFI systems; GRUB is used automatically instead on older BIOS systems)",
+              "Hostname — type a name for this computer",
+              "Authentication — set a root password, then add a regular user account for yourself and make sure sudo/admin privileges are enabled for it; this is the only place a personal account gets created, and it's the account you'll actually log into afterward",
+              "Profile — select Desktop, then pick a desktop environment (GNOME or KDE Plasma are the most beginner-friendly); archinstall installs it and sets up a matching graphical login screen automatically",
+              "Applications — choose PipeWire as the audio server",
+              "Timezone — select yours",
+            ],
+          },
+          {
+            type: "p",
+            text: "Once you've filled in everything required, select Install at the bottom of the menu and confirm — archinstall will then download and set up the whole system, which takes a while depending on your internet connection.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "When it finishes, archinstall will say it's safe to reboot",
+              "Type reboot, and remove the USB drive as your computer restarts",
+            ],
+          },
+        ],
+      },
+      {
+        title: "First boot and updates",
+        summary:
+          "Log in and bring the system fully up to date — Arch doesn't do this for you after install.",
+        detail: [
+          {
+            type: "p",
+            text: "Because you selected a desktop profile and created a sudo-enabled user account, your Arch install should boot straight to a graphical login screen (GDM for GNOME, SDDM for KDE Plasma, and so on), and then into your desktop after you log in. If you'd skipped the desktop profile, it would boot to a plain text login instead, with setting up a graphical environment left as an entirely manual step afterward.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Log in with the user account you created during install",
+              "Open a terminal and run sudo pacman -Syu to bring every package fully up to date",
+            ],
+          },
+          {
+            type: "p",
+            text: "That's the full install, start to finish. Arch is a rolling release, so there's no separate \"upgrade to the next version\" the way Mint or Fedora work — running pacman -Syu regularly is how it stays current. From here, the Learn section's lessons and the Search page pick up — though given how hands-on Arch is by design, expect to lean on the Arch Wiki (wiki.archlinux.org) more than usual as you go, even beyond this site.",
+          },
+        ],
+      },
+    ],
+    related: [
+      {
+        href: "learn.html?topic=terminal-basics",
+        label: "Next: what a terminal actually is →",
+      },
+    ],
+  },
+  {
+    slug: "nixos",
+    name: "NixOS",
+    accent: "#2f6690",
+    tagline:
+      "A Linux distribution where the whole system is described in one config file, not clicked together app by app",
+    summary: "Full install walkthrough, start to finish.",
+    steps: [
+      {
+        title: "Download the ISO",
+        summary:
+          "Grab the NixOS installer — but read this first, because NixOS works on a genuinely different idea than every other distro on this site.",
+        detail: [
+          {
+            type: "p",
+            text: "Before downloading anything: on every other distro in this guide, you install a system, then add or remove individual apps over time using a package manager, roughly the way you'd use an app store. NixOS flips that. Your entire system — every package installed, every setting, every service running — is described in a single text file (/etc/nixos/configuration.nix), and the system is rebuilt from that description whenever you change it. Nothing you didn't declare in that file is supposed to stick around permanently. It's a genuinely different mental model, not just a different installer.",
+          },
+          {
+            type: "p",
+            text: "If you're brand new to Linux and just want a comfortable daily-driver desktop, a distro like Linux Mint or Zorin OS will get you there with far less to learn up front. This guide is written for people who specifically want NixOS and are ready for that trade-off — not as a general first step into Linux. The step structure below matches the rest of this site, but expect more new concepts along the way, especially at the end.",
+          },
+          {
+            type: "p",
+            text: "The good news for installing it: NixOS does ship an official graphical installer built on Calamares (the same installer framework used by several other distros on this site), and it's the option nixos.org itself recommends for desktop users. That's the path this guide follows. There's also an older, fully manual path — partition by hand, write the config file yourself, run nixos-install from a text console — which some longtime users still prefer, but it's a more advanced route this walkthrough doesn't cover.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Go to nixos.org/download",
+              'Under "Graphical ISO image," download the 64-bit Intel/AMD build (currently around 3.8GB) — this is the version this guide follows, and the one recommended for desktop installs',
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "There's also a \"Minimal ISO image\" (around 1.7GB) that skips the graphical desktop and installer entirely — it boots to a text console and expects you to partition the disk and write the config file by hand. It's a legitimate, well-documented path, just not the beginner-friendly one this guide follows.",
+              "The graphical installer checks your system before letting you continue — you'll need at least 3GB of RAM and 10GB of free disk space, and an internet connection (it's required, not optional, during install).",
+              "64-bit ARM builds of both editions exist too, but this guide assumes typical Intel/AMD PC hardware.",
+              "At the time of writing, the current stable release is NixOS 26.05 — NixOS uses a year.month version scheme and releases roughly twice a year.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Create a bootable USB",
+        summary: "Turn a USB drive into something your computer can install NixOS from.",
+        detail: [
+          {
+            type: "p",
+            text: "You'll need a USB drive that's at least 8GB — back up anything on it first, since this process erases it completely. NixOS's own manual recommends balenaEtcher for this, the same tool used elsewhere on this site.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the NixOS graphical ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
+            ],
+          },
+          {
+            type: "p",
+            text: "When it finishes, Etcher will say the flash succeeded and safely eject the drive. Leave it plugged in — you'll boot from it in the next step.",
+          },
+        ],
+      },
+      {
+        title: "Boot into the installer",
+        summary:
+          "Restart your computer and start up from the USB — NixOS boots to a live desktop and opens its graphical installer automatically.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              "Select your USB drive from the boot menu",
+              "At the installer's own boot menu, leave the default option selected and press Enter (or just wait)",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Dell: F12",
+              "HP: F9 or Esc",
+              "Lenovo: F12 or the Novo button",
+              "ASUS: F8 or Esc",
+              "Acer: F12",
+              "Mac: hold Option/Alt at startup",
+            ],
+          },
+          {
+            type: "p",
+            text: "If you're not sure which key, watch closely during the very first second of startup — many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
+          },
+          {
+            type: "p",
+            text: "If your computer has Secure Boot enabled in UEFI settings, disable it first — NixOS's install media isn't signed for Secure Boot, and the installer won't boot with it turned on.",
+          },
+          {
+            type: "p",
+            text: "From here, the system loads a live desktop (GNOME, by default) and the graphical NixOS installer opens on its own shortly after — this can take a minute or two, since it's loading a full desktop environment from the USB first. You don't need to click anything to launch it.",
+          },
+        ],
+      },
+      {
+        title: "Choose how to install",
+        summary:
+          "On the installer's Partitioning screen, erase the disk and let it set things up automatically.",
+        detail: [
+          {
+            type: "p",
+            text: "This checklist covers a straightforward single-OS setup, where NixOS becomes the only operating system on the drive. On the Partitioning screen, the simplest option is \"Erase disk\", which wipes the selected drive and lays out partitions for you automatically (ext4 by default).",
+          },
+          {
+            type: "p",
+            text: "Important: this permanently erases everything on that drive. Back up anything you want to keep before continuing.",
+          },
+          {
+            type: "checklist",
+            items: [
+              'On the "Partitioning" screen, select "Erase disk"',
+              "Double-check the correct drive is selected at the top of the screen before continuing — this is the drive that gets wiped",
+              'In the swap dropdown, select "Swap (with Hibernation)" unless you have a specific reason not to',
+              "Optional: the installer also offers whole-disk encryption (LUKS) here — if you're not sure whether you need it, it's safe to leave unchecked for a first install",
+            ],
+          },
+          {
+            type: "p",
+            text: "Dual-boot is possible on NixOS but involves partitioning carefully around your existing OS — a more advanced process not covered by this walkthrough.",
+          },
+        ],
+      },
+      {
+        title: "Follow the installer prompts",
+        summary:
+          "Work through the rest of the installer — language, timezone, keyboard, your user account, and which desktop you want.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "On the \"Welcome\" screen, choose your installer/system language — leaving it as American English makes it easier to search for error messages online later",
+              "Choose your location on the map to set your timezone (the installer guesses based on your IP address, so double-check it)",
+              "Choose your keyboard layout — the default model works fine for most desktop keyboards",
+              'On the "Users" screen, enter your display name, login name, and password — this account gets full admin (sudo) access automatically, the same as most other distros on this site',
+              "Optional: enable automatic login to the desktop on the same screen, if you want it",
+            ],
+          },
+          {
+            type: "p",
+            text: 'Next, you\'ll pick a desktop environment. NixOS\'s installer offers a real choice here — GNOME, Plasma, Xfce, Pantheon, Cinnamon, MATE, Enlightenment, LXQt, and Budgie are all listed, plus a "No desktop" option for a bare system. GNOME is the default; if you\'re not sure which to pick, the installer itself suggests GNOME or Plasma as the two most popular, well-tested options — they just have quite different designs, so it comes down to preference.',
+          },
+          {
+            type: "checklist",
+            items: [
+              "Select the desktop environment you want, then continue",
+              "On the next screen, you can choose to allow unfree software (needed for some hardware drivers and codecs) — if you're unsure, it's fine to leave this off for now; it can be changed later in the config file",
+              'Review your choices on the "Summary" screen, then click "Install"',
+            ],
+          },
+          {
+            type: "p",
+            text: "The install itself takes roughly 15 minutes, depending on your desktop environment choice, internet speed, and disk speed. When it's done, remove the USB drive and reboot into your new system.",
+          },
+        ],
+      },
+      {
+        title: "First boot and updates",
+        summary:
+          "Log in normally — but know that updating and installing software on NixOS doesn't work like it does anywhere else on this site.",
+        detail: [
+          {
+            type: "p",
+            text: "You'll land on a login screen matching the desktop you picked, and the account you created works exactly as you'd expect — full sudo access, normal password login. That part feels completely ordinary.",
+          },
+          {
+            type: "p",
+            text: "What's different is everything after that. There's no app-store-style update button and no apt/dnf/pacman-style \"install this one package\" command that sticks around on its own. The entire system is described in /etc/nixos/configuration.nix, and you change the system by editing that file, then telling NixOS to rebuild itself to match it.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "To update everything on the system to the newest available versions: sudo nixos-rebuild switch --upgrade",
+              "To install a new application (for example, Firefox): open /etc/nixos/configuration.nix with sudo in a text editor, add it to the environment.systemPackages list, save, then run sudo nixos-rebuild switch to apply it",
+              "To browse available packages and their exact config-file names, use search.nixos.org rather than guessing",
+              "For NixOS's own built-in manual and full option reference at any time, run nixos-help",
+            ],
+          },
+          {
+            type: "p",
+            text: "One genuinely nice side effect of this approach: every time you run nixos-rebuild, it creates a new numbered \"generation\" of your system rather than overwriting the old one, and older generations stay selectable from the boot menu. If a change breaks something, you can boot into the previous generation and you're back to normal — a safety net most other distros don't give you this easily.",
+          },
+          {
+            type: "p",
+            text: "You'll also likely run into \"flakes\" fairly quickly if you look up NixOS tutorials online — a newer, alternative way of managing configuration that a lot of the community has moved toward. It's optional, and this guide deliberately doesn't cover it; the configuration.nix approach above is the traditional, still fully supported starting point, and flakes are worth exploring once the basics feel comfortable.",
+          },
+          {
+            type: "p",
+            text: "That's the full install, start to finish. From here, the Learn section's lessons and the Search page pick up as usual — though given how different NixOS's day-to-day workflow is, expect to lean on the official manual and search.nixos.org more than you would on other distros.",
+          },
+        ],
+      },
+    ],
+    related: [
+      {
+        href: "learn.html?topic=terminal-basics",
+        label: "Next: what a terminal actually is →",
+      },
+    ],
+  },
 ];
