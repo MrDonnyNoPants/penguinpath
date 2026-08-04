@@ -19,6 +19,12 @@
   margin: 8px 0 16px;
 }
 
+.hub-note {
+  color: var(--ink-dim);
+  font-size: 0.9rem;
+  margin: 0 0 20px;
+}
+
 .guide-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -55,7 +61,61 @@
 .guide-summary {
   color: var(--ink-dim);
   font-size: 1.02rem;
-  margin: 0 0 28px;
+  margin: 0 0 16px;
+}
+
+.step-detail-body .sub-checklist {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sub-checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--ink-dim);
+  font-size: 0.95rem;
+}
+
+.sub-checklist-item.checked {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.sub-check {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  font-size: 0.65rem;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.sub-check::after {
+  content: "✓";
+}
+
+.sub-check:hover {
+  border-color: var(--accent);
+}
+
+.sub-check.checked {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
 }
 
 .step-list {
@@ -63,6 +123,35 @@
   flex-direction: column;
   gap: 10px;
   margin-bottom: 24px;
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 20px;
+  flex-wrap: wrap;
+}
+
+.progress-note {
+  color: var(--ink-dim);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.reset-progress-btn {
+  background: none;
+  border: none;
+  color: var(--ink-dim);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.reset-progress-btn:hover {
+  color: var(--accent);
 }
 
 .step-row {
@@ -90,6 +179,13 @@
 .step-summary {
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.step-summary-main {
+  display: flex;
+  align-items: flex-start;
   gap: 14px;
 }
 
@@ -105,6 +201,42 @@
   justify-content: center;
   font-size: 0.85rem;
   font-weight: 600;
+}
+
+.step-check {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  font-size: 0.8rem;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.step-check::after {
+  content: "✓";
+}
+
+.step-check:hover {
+  border-color: var(--accent);
+}
+
+.step-check.checked {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.step-row.done .step-text strong {
+  text-decoration: line-through;
+  opacity: 0.7;
 }
 
 .step-text {

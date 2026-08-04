@@ -3,6 +3,7 @@ const INSTALL_GUIDES = [
     slug: "linux-mint",
     name: "Linux Mint",
     accent: "#3ecf8e",
+    tagline: "The reliable all-rounder",
     summary: "Full install walkthrough, start to finish.",
     steps: [
       {
@@ -11,11 +12,15 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: "Go to linuxmint.com/download.php. You'll see three editions - Cinnamon, MATE, and Xfce. If you're not sure which one, pick Cinnamon: it's the default, most polished, and what most guides (including this one) assume.",
+            text: "Linux Mint offers three editions — Cinnamon, MATE, and Xfce. If you're not sure which one, Cinnamon is the default, most polished, and what most guides (including this one) assume.",
           },
           {
-            type: "p",
-            text: "Click Cinnamon, then pick a mirror close to your location (any of them work - closer just means a faster download). The file that downloads is the ISO - a single file, usually 2-3GB, that contains the entire installer and operating system.",
+            type: "checklist",
+            items: [
+              "Go to linuxmint.com/download.php",
+              "Click Cinnamon",
+              "Pick a mirror close to your location and download the ISO (usually 2-3GB)",
+            ],
           },
           {
             type: "list",
@@ -33,18 +38,15 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer), and you should back up anything on it first - this process erases it completely.",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
           },
           {
-            type: "p",
-            text: "Download balenaEtcher (balena.io/etcher) - it's free and works on Windows, Mac, and Linux. Install it and open it.",
-          },
-          {
-            type: "list",
+            type: "checklist",
             items: [
-              'Click "Flash from file" and select the Mint ISO you downloaded.',
-              'Click "Select target" and choose your USB drive - double-check you\'ve picked the right one, since this step erases it.',
-              'Click "Flash!" and wait. It usually takes 5-15 minutes depending on the USB drive\'s speed.',
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the Mint ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
             ],
           },
           {
@@ -59,8 +61,13 @@ const INSTALL_GUIDES = [
           "Restart your computer and start up from the USB instead of your normal operating system.",
         detail: [
           {
-            type: "p",
-            text: "With the USB still plugged in, restart your computer. As it powers back on, you need to hit your boot-menu key before Windows (or macOS) loads - this varies by manufacturer:",
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              'Select your USB drive from the boot menu (it\'ll show the drive\'s brand name, not "Linux Mint")',
+              'Double-click the "Install Linux Mint" icon on the desktop that appears',
+            ],
           },
           {
             type: "list",
@@ -77,14 +84,6 @@ const INSTALL_GUIDES = [
             type: "p",
             text: "If you're not sure which key, watch closely during the very first second of startup - many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
           },
-          {
-            type: "p",
-            text: "From the boot menu, select your USB drive (it'll usually show the brand name of the drive, not \"Linux Mint\"). Your computer will boot into a live version of Linux Mint - you're now running it directly off the USB, nothing is installed yet.",
-          },
-          {
-            type: "p",
-            text: 'On the desktop that appears, look for an icon labeled "Install Linux Mint" and double-click it to begin.',
-          },
         ],
       },
       {
@@ -94,19 +93,21 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: 'During the installer, you\'ll reach a screen asking how to install. This checklist covers the full, single-OS install - where Linux Mint becomes the only operating system on the drive. Look for an option along the lines of "Erase disk and install Linux Mint."',
+            text: "During the installer, you'll reach a screen asking how to install. This checklist covers the full, single-OS install - where Linux Mint becomes the only operating system on the drive.",
           },
           {
             type: "p",
-            text: "Important: this step permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else (an external drive, cloud storage) before continuing.",
+            text: "Important: this permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else (an external drive, cloud storage) before continuing.",
           },
           {
             type: "p",
             text: "If you want to keep your existing operating system and choose between the two each time you start your computer, that's dual-boot - a different process with its own separate guide, not covered by this walkthrough. If that's what you actually want, stop here rather than guessing at this screen.",
           },
           {
-            type: "p",
-            text: 'Once you\'ve selected "Erase disk and install Linux Mint" (or equivalent), click Continue.',
+            type: "checklist",
+            items: [
+              'Select "Erase disk and install Linux Mint" (or equivalent) and click Continue',
+            ],
           },
         ],
       },
@@ -116,22 +117,28 @@ const INSTALL_GUIDES = [
           "Set your language, keyboard, timezone, and account - then let it install.",
         detail: [
           {
-            type: "list",
+            type: "checklist",
             items: [
-              "Select your language and click Continue.",
-              "Select your keyboard layout (the installer usually detects this correctly already) and click Continue.",
-              "Confirm your timezone — it's usually auto-detected from your internet connection.",
-              "Create your account: a name, a computer name, a username, and a password. Remember this password — it's what you'll use both to log in and for sudo afterward.",
-              'Optionally check "Log in automatically" if this is a personal computer only you use, or leave it unchecked to require the password at every startup.',
+              "Select your language and click Continue",
+              "Select your keyboard layout (the installer usually detects this correctly already) and click Continue",
+              "Confirm your timezone (usually auto-detected from your internet connection)",
+              "Create your account: a name, a computer name, a username, and a password",
+              'Optionally check "Log in automatically" if this is a personal computer only you use',
             ],
+          },
+          {
+            type: "p",
+            text: "Remember your password — it's what you'll use both to log in and for sudo afterward.",
           },
           {
             type: "p",
             text: "After confirming these, the installer starts copying files — this typically takes 10-20 minutes. You can just wait; there's nothing else to configure during this part.",
           },
           {
-            type: "p",
-            text: "When it finishes, it'll prompt you to restart. Do so, and remove the USB drive when prompted (or as soon as the screen goes black during restart) — leaving it in can boot you back into the installer instead of your new system.",
+            type: "checklist",
+            items: [
+              "Restart when prompted, and remove the USB drive as the screen goes black — leaving it in can boot you back into the installer instead of your new system",
+            ],
           },
         ],
       },
@@ -141,12 +148,11 @@ const INSTALL_GUIDES = [
           "What to do in the first few minutes after your new install starts up.",
         detail: [
           {
-            type: "p",
-            text: "Your computer will restart into Linux Mint itself for the first time — log in with the password you set in the previous step.",
-          },
-          {
-            type: "p",
-            text: "The first thing worth doing is checking for updates. Look for a shield icon in the bottom-right taskbar (it may show a small red mark) — that's the Update Manager. Open it and install everything it lists. This is normal and safe; it's the same kind of update prompt as any operating system.",
+            type: "checklist",
+            items: [
+              "Log in with the password you set during install",
+              "Open the Update Manager (shield icon, bottom-right taskbar) and install everything it lists",
+            ],
           },
           {
             type: "p",
@@ -170,6 +176,7 @@ const INSTALL_GUIDES = [
     slug: "pop-os",
     name: "Pop!_OS",
     accent: "#48b9c7",
+    tagline: "Built for gaming and power users",
     summary: "Full install walkthrough, start to finish.",
     steps: [
       {
@@ -179,7 +186,7 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: "Go to pop.system76.com and click Download. Unlike most distros, Pop!_OS offers two different ISOs — pick the one that matches your graphics hardware, not just whichever is listed first.",
+            text: "Pop!_OS offers two different ISOs — pick the one that matches your graphics hardware, not just whichever is listed first.",
           },
           {
             type: "list",
@@ -193,8 +200,11 @@ const INSTALL_GUIDES = [
             text: "Not sure which graphics card you have? On Windows, right-click the Start button → Device Manager → Display adapters will tell you. When in doubt and you don't see NVIDIA listed anywhere, use the Intel/AMD ISO.",
           },
           {
-            type: "p",
-            text: "The download is a single ISO file, typically 2-3GB. Don't extract it — it gets used as-is in the next step.",
+            type: "checklist",
+            items: [
+              "Go to pop.system76.com",
+              "Click Download and choose the ISO that matches your graphics hardware (see above)",
+            ],
           },
         ],
       },
@@ -205,18 +215,15 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer), and you should back up anything on it first — this process erases it completely.",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
           },
           {
-            type: "p",
-            text: "Download balenaEtcher (balena.io/etcher) — it's free and works on Windows, Mac, and Linux. Install it and open it.",
-          },
-          {
-            type: "list",
+            type: "checklist",
             items: [
-              'Click "Flash from file" and select the Pop!_OS ISO you downloaded.',
-              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it.',
-              'Click "Flash!" and wait. It usually takes 5-15 minutes depending on the USB drive\'s speed.',
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the Pop!_OS ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
             ],
           },
           {
@@ -231,8 +238,13 @@ const INSTALL_GUIDES = [
           "Restart your computer and boot from the USB — Pop!_OS drops you straight into its installer.",
         detail: [
           {
-            type: "p",
-            text: "With the USB still plugged in, restart your computer. As it powers back on, you need to hit your boot-menu key before Windows (or macOS) loads — this varies by manufacturer:",
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              'Select your USB drive from the boot menu (it\'ll show the drive\'s brand name, not "Pop!_OS")',
+              "Click Install Pop!_OS on the screen that appears",
+            ],
           },
           {
             type: "list",
@@ -251,7 +263,7 @@ const INSTALL_GUIDES = [
           },
           {
             type: "p",
-            text: 'Select your USB drive from the boot menu (it\'ll show the brand name of the drive, not "Pop!_OS"). Unlike some distros that boot to a live desktop first, Pop!_OS\'s USB boots straight into a "Try Demo" / "Install Pop!_OS" screen — click Install Pop!_OS to begin.',
+            text: 'Unlike some distros that boot to a live desktop first, Pop!_OS\'s USB boots straight into a "Try Demo" / "Install Pop!_OS" screen.',
           },
         ],
       },
@@ -261,8 +273,11 @@ const INSTALL_GUIDES = [
           "Decide between a clean install and Pop!_OS's custom/advanced option — and consider disk encryption.",
         detail: [
           {
-            type: "p",
-            text: 'After selecting your language and keyboard layout, you\'ll reach "How would you like to install Pop!_OS?" This checklist covers Clean Install — where Pop!_OS becomes the only operating system on the drive, replacing anything currently there.',
+            type: "checklist",
+            items: [
+              "Select your language and keyboard layout",
+              'Select "Clean Install" when asked how you\'d like to install Pop!_OS',
+            ],
           },
           {
             type: "p",
@@ -283,19 +298,25 @@ const INSTALL_GUIDES = [
         summary: "Confirm the disk, create your account, and let it install.",
         detail: [
           {
-            type: "list",
+            type: "checklist",
             items: [
-              "Confirm the drive you're installing to (only relevant if you have more than one drive connected).",
-              "Create your account: your name, a username, and a password. Remember this password — you'll use it to log in and for sudo afterward.",
+              "Confirm the drive you're installing to (only relevant if you have more than one drive connected)",
+              "Create your account: your name, a username, and a password",
             ],
+          },
+          {
+            type: "p",
+            text: "Remember this password — you'll use it to log in and for sudo afterward.",
           },
           {
             type: "p",
             text: "After confirming these, installation begins — this typically takes 10-20 minutes. You can just wait.",
           },
           {
-            type: "p",
-            text: "When it finishes, it'll prompt you to restart. Remove the USB drive when prompted or as soon as the screen goes black — leaving it in can boot you back into the installer instead of your new system.",
+            type: "checklist",
+            items: [
+              "Restart when prompted, and remove the USB drive as the screen goes black — leaving it in can boot you back into the installer instead of your new system",
+            ],
           },
         ],
       },
@@ -305,12 +326,16 @@ const INSTALL_GUIDES = [
           "What to expect the first time Pop!_OS starts up, and how to check for updates.",
         detail: [
           {
-            type: "p",
-            text: "Log in with the password you just set. Pop!_OS opens a Welcome app on first login to help finish setting things up and highlight a few features, like COSMIC's keyboard-driven window tiling — worth clicking through once, but entirely skippable.",
+            type: "checklist",
+            items: [
+              "Log in with the password you just set",
+              "Open COSMIC Store (in the dock, or press Super and search for it)",
+              "Click Updates in the left menu, then Check for updates and Update all",
+            ],
           },
           {
             type: "p",
-            text: "For updates, open COSMIC Store (Pop!_OS's current software center — look for it in the dock, or press Super and search for it). Click Updates in the left menu, then Check for updates and Update all. This is normal and safe, the same as any operating system checking for updates.",
+            text: "Pop!_OS opens a Welcome app on first login to help finish setting things up and highlight a few features, like COSMIC's keyboard-driven window tiling — worth clicking through once, but entirely skippable.",
           },
           {
             type: "p",
@@ -330,6 +355,7 @@ const INSTALL_GUIDES = [
     slug: "zorin-os",
     name: "Zorin OS",
     accent: "#16a3e0",
+    tagline: "The gentlest landing pad from Windows or Mac",
     summary: "Full install walkthrough, start to finish.",
     steps: [
       {
@@ -339,11 +365,15 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: "Go to zorin.com/os/download/. You'll see a few editions — Core, Lite, and Pro. Core is free, full-featured, and the right choice for most people; Lite is a lighter-weight free option for older or lower-spec hardware; Pro is a paid edition with extra layouts and pre-installed apps that isn't necessary to get a complete experience.",
+            text: "Zorin OS has a few editions — Core, Lite, and Pro. Core is free, full-featured, and the right choice for most people; Lite is a lighter-weight free option for older or lower-spec hardware; Pro is a paid edition with extra layouts and pre-installed apps that isn't necessary to get a complete experience.",
           },
           {
-            type: "p",
-            text: "Click Download under Core (or Lite if your hardware is older) and choose the 64-bit version — nearly every computer made in the last decade needs this one, not 32-bit. The file that downloads is the ISO, typically 2-3GB.",
+            type: "checklist",
+            items: [
+              "Go to zorin.com/os/download/",
+              "Click Download under Core (or Lite if your hardware is older)",
+              "Choose the 64-bit version — nearly every computer made in the last decade needs this one, not 32-bit",
+            ],
           },
           {
             type: "list",
@@ -360,18 +390,15 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer), and you should back up anything on it first — this process erases it completely.",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
           },
           {
-            type: "p",
-            text: "Download balenaEtcher (balena.io/etcher) — it's free and works on Windows, Mac, and Linux. Install it and open it.",
-          },
-          {
-            type: "list",
+            type: "checklist",
             items: [
-              'Click "Flash from file" and select the Zorin OS ISO you downloaded.',
-              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it.',
-              'Click "Flash!" and wait. It usually takes 5-15 minutes depending on the USB drive\'s speed.',
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the Zorin OS ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
             ],
           },
           {
@@ -386,8 +413,13 @@ const INSTALL_GUIDES = [
           "Restart your computer and start up from the USB instead of your normal operating system.",
         detail: [
           {
-            type: "p",
-            text: "With the USB still plugged in, restart your computer. As it powers back on, you need to hit your boot-menu key before Windows (or macOS) loads — this varies by manufacturer:",
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              'Select your USB drive from the boot menu (it\'ll show the drive\'s brand name, not "Zorin OS")',
+              'Double-click the "Install Zorin OS" icon on the desktop that appears',
+            ],
           },
           {
             type: "list",
@@ -404,10 +436,6 @@ const INSTALL_GUIDES = [
             type: "p",
             text: "If you're not sure which key, watch closely during the very first second of startup — many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
           },
-          {
-            type: "p",
-            text: 'Select your USB drive from the boot menu (it\'ll show the brand name of the drive, not "Zorin OS"). Your computer will boot into a live version of Zorin OS. On the desktop that appears, look for an icon labeled "Install Zorin OS" and double-click it to begin.',
-          },
         ],
       },
       {
@@ -417,19 +445,21 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: 'During the installer, you\'ll reach a screen asking how to install. This checklist covers the full, single-OS install — where Zorin OS becomes the only operating system on the drive. Look for an option along the lines of "Erase disk and install Zorin OS."',
+            text: "During the installer, you'll reach a screen asking how to install. This checklist covers the full, single-OS install — where Zorin OS becomes the only operating system on the drive.",
           },
           {
             type: "p",
-            text: "Important: this step permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else before continuing.",
+            text: "Important: this permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else before continuing.",
           },
           {
             type: "p",
             text: "If you want to keep your existing operating system and choose between the two each time you start your computer, that's dual-boot — a different process with its own separate guide, not covered by this walkthrough.",
           },
           {
-            type: "p",
-            text: 'Once you\'ve selected "Erase disk and install Zorin OS" (or equivalent), click Continue.',
+            type: "checklist",
+            items: [
+              'Select "Erase disk and install Zorin OS" (or equivalent) and click Continue',
+            ],
           },
         ],
       },
@@ -439,21 +469,27 @@ const INSTALL_GUIDES = [
           "Set your language, keyboard, timezone, and account — then let it install.",
         detail: [
           {
-            type: "list",
+            type: "checklist",
             items: [
-              "Select your language and click Continue.",
-              "Select your keyboard layout (the installer usually detects this correctly already) and click Continue.",
-              "Confirm your timezone — it's usually auto-detected from your internet connection.",
-              "Create your account: a name, a computer name, a username, and a password. Remember this password — you'll use it to log in and for sudo afterward.",
+              "Select your language and click Continue",
+              "Select your keyboard layout (the installer usually detects this correctly already) and click Continue",
+              "Confirm your timezone (usually auto-detected from your internet connection)",
+              "Create your account: a name, a computer name, a username, and a password",
             ],
+          },
+          {
+            type: "p",
+            text: "Remember your password — you'll use it to log in and for sudo afterward.",
           },
           {
             type: "p",
             text: "After confirming these, the installer starts copying files — this typically takes 10-20 minutes. You can just wait.",
           },
           {
-            type: "p",
-            text: "When it finishes, it'll prompt you to restart. Remove the USB drive when prompted or as soon as the screen goes black — leaving it in can boot you back into the installer instead of your new system.",
+            type: "checklist",
+            items: [
+              "Restart when prompted, and remove the USB drive as the screen goes black — leaving it in can boot you back into the installer instead of your new system",
+            ],
           },
         ],
       },
@@ -462,12 +498,16 @@ const INSTALL_GUIDES = [
         summary: "Pick your layout, then check for updates.",
         detail: [
           {
-            type: "p",
-            text: "The first time you log in, Zorin OS Welcome opens automatically. This is where Zorin's signature feature lives — under Appearance, you can switch the entire desktop layout to look and behave like Windows, macOS, or a more traditional Linux layout. Pick whichever feels most familiar; you can change it again anytime later from the same app.",
+            type: "checklist",
+            items: [
+              "Log in for the first time",
+              "Open Zorin OS Welcome (opens automatically) and choose your Appearance layout — Windows-style, macOS-style, or traditional Linux",
+              "Open Software Updater from the app menu and install everything it lists",
+            ],
           },
           {
             type: "p",
-            text: "For updates, open Software Updater from the app menu (it may also prompt you automatically after a few minutes). Install everything it lists — this is normal and safe, the same as any operating system checking for updates.",
+            text: "You can change your Appearance layout again anytime later from the same app if you change your mind.",
           },
           {
             type: "p",
@@ -487,6 +527,7 @@ const INSTALL_GUIDES = [
     slug: "mx-linux",
     name: "MX Linux",
     accent: "#d9a441",
+    tagline: "Lightweight and fast",
     summary: "Full install walkthrough, start to finish.",
     steps: [
       {
@@ -496,11 +537,18 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: "Go to mxlinux.org/download-links/. You'll see a few editions — Xfce, KDE, and Fluxbox. Xfce is the flagship, default edition and the right choice for most people, especially on older or lower-spec hardware, which is exactly where MX Linux tends to shine.",
+            text: "MX Linux has a few editions — Xfce, KDE, and Fluxbox. Xfce is the flagship, default edition and the right choice for most people, especially on older or lower-spec hardware, which is exactly where MX Linux tends to shine.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Go to mxlinux.org/download-links/",
+              "Under the Xfce section, download the 64-bit (AMD64) ISO",
+            ],
           },
           {
             type: "p",
-            text: "Under the Xfce section, download the 64-bit (AMD64) ISO — nearly every computer made in the last decade needs this one. A 32-bit version exists too, but it's only relevant for genuinely old hardware.",
+            text: "A 32-bit version exists too, but it's only relevant for genuinely old hardware.",
           },
           {
             type: "list",
@@ -517,18 +565,15 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer), and you should back up anything on it first — this process erases it completely.",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
           },
           {
-            type: "p",
-            text: "Download balenaEtcher (balena.io/etcher) — it's free and works on Windows, Mac, and Linux. Install it and open it.",
-          },
-          {
-            type: "list",
+            type: "checklist",
             items: [
-              'Click "Flash from file" and select the MX Linux ISO you downloaded.',
-              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it.',
-              'Click "Flash!" and wait. It usually takes 5-15 minutes depending on the USB drive\'s speed.',
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the MX Linux ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
             ],
           },
           {
@@ -543,8 +588,13 @@ const INSTALL_GUIDES = [
           "Restart your computer and start up from the USB instead of your normal operating system.",
         detail: [
           {
-            type: "p",
-            text: "With the USB still plugged in, restart your computer. As it powers back on, you need to hit your boot-menu key before Windows (or macOS) loads — this varies by manufacturer:",
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              "Select your USB drive from the boot menu",
+              'Double-click the "Install MX Linux" icon on the desktop (or find it in the applications menu) to open Minstall',
+            ],
           },
           {
             type: "list",
@@ -563,7 +613,7 @@ const INSTALL_GUIDES = [
           },
           {
             type: "p",
-            text: 'Select your USB drive from the boot menu. MX Linux boots to a full live desktop, the same as it would look once installed — look for an icon labeled "Install MX Linux" on the desktop (or in the applications menu) and double-click it to open MX Linux\'s installer, called Minstall.',
+            text: "MX Linux boots to a full live desktop, the same as it would look once installed.",
           },
         ],
       },
@@ -574,15 +624,19 @@ const INSTALL_GUIDES = [
         detail: [
           {
             type: "p",
-            text: 'During Minstall, you\'ll reach a screen asking how to install. This checklist covers the full, single-OS install — where MX Linux becomes the only operating system on the drive. Look for an option along the lines of "Erase Disk."',
+            text: "During Minstall, you'll reach a screen asking how to install. This checklist covers the full, single-OS install — where MX Linux becomes the only operating system on the drive.",
           },
           {
             type: "p",
-            text: "Important: this step permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else before continuing.",
+            text: "Important: this permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else before continuing.",
           },
           {
             type: "p",
             text: "If you want to keep your existing operating system and choose between the two each time you start your computer, that's dual-boot — a different process with its own separate guide, not covered by this walkthrough.",
+          },
+          {
+            type: "checklist",
+            items: ['Select "Erase Disk" (or equivalent) and continue'],
           },
         ],
       },
@@ -592,10 +646,10 @@ const INSTALL_GUIDES = [
           "Set your timezone and account — Minstall also offers an optional root account, which you can safely skip.",
         detail: [
           {
-            type: "list",
+            type: "checklist",
             items: [
-              "Confirm your timezone and keyboard layout.",
-              "Create your user account: your name, a username, and a password.",
+              "Confirm your timezone and keyboard layout",
+              "Create your user account: your name, a username, and a password",
             ],
           },
           {
@@ -607,8 +661,10 @@ const INSTALL_GUIDES = [
             text: "After confirming these, installation begins — this typically takes 10-20 minutes.",
           },
           {
-            type: "p",
-            text: "When it finishes, it'll prompt you to restart. Remove the USB drive when prompted or as soon as the screen goes black — leaving it in can boot you back into the installer instead of your new system.",
+            type: "checklist",
+            items: [
+              "Restart when prompted, and remove the USB drive as the screen goes black — leaving it in can boot you back into the installer instead of your new system",
+            ],
           },
         ],
       },
@@ -617,12 +673,839 @@ const INSTALL_GUIDES = [
         summary: "What to expect on first login, and how to check for updates.",
         detail: [
           {
-            type: "p",
-            text: "Log in with your regular user password.",
+            type: "checklist",
+            items: [
+              "Log in with your regular user password",
+              "Open the MX Update tool from the app menu (or taskbar icon) and install everything it lists",
+            ],
           },
           {
             type: "p",
-            text: "For updates, open the MX Update tool from the app menu (sometimes shown as a small icon in the taskbar). Install everything it lists — this is normal and safe, the same as any operating system checking for updates.",
+            text: "That's the full install, start to finish. From here, the Learn section's lessons and the Search page pick up exactly where this leaves off.",
+          },
+        ],
+      },
+    ],
+    related: [
+      {
+        href: "learn.html?topic=terminal-basics",
+        label: "Next: what a terminal actually is →",
+      },
+    ],
+  },
+  {
+    slug: "ubuntu",
+    name: "Ubuntu",
+    accent: "#e9724c",
+    tagline: "The most recognized name in Linux",
+    summary: "Full install walkthrough, start to finish.",
+    steps: [
+      {
+        title: "Download the ISO",
+        summary: "Grab the Ubuntu Desktop installer file from the official site.",
+        detail: [
+          {
+            type: "p",
+            text: "Ubuntu Desktop doesn't split into multiple editions the way some distros do — there's just one download for most computers.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Go to ubuntu.com/download/desktop",
+              "Click Download — the file that comes down is the ISO (typically 4-6GB)",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Don't extract or open the ISO after downloading — it gets used as-is in the next step.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Create a bootable USB",
+        summary:
+          "Turn a USB drive into something your computer can install Ubuntu from.",
+        detail: [
+          {
+            type: "p",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the Ubuntu ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
+            ],
+          },
+          {
+            type: "p",
+            text: "When it finishes, Etcher will say the flash succeeded and safely eject the drive. Leave it plugged in — you'll boot from it in the next step.",
+          },
+        ],
+      },
+      {
+        title: "Boot into the installer",
+        summary:
+          "Restart your computer and start up from the USB instead of your normal operating system.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              'Select your USB drive from the boot menu (it\'ll show the drive\'s brand name, not "Ubuntu")',
+              "Choose Try or Install Ubuntu, then launch the installer",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Dell: F12",
+              "HP: F9 or Esc",
+              "Lenovo: F12 or the Novo button",
+              "ASUS: F8 or Esc",
+              "Acer: F12",
+              "Mac: hold Option/Alt at startup",
+            ],
+          },
+          {
+            type: "p",
+            text: "If you're not sure which key, watch closely during the very first second of startup — many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
+          },
+        ],
+      },
+      {
+        title: "Choose how to install",
+        summary: "Decide whether Ubuntu replaces your current OS or lives alongside it.",
+        detail: [
+          {
+            type: "p",
+            text: "During the installer, you'll reach a screen asking how to install. This checklist covers the full, single-OS install — where Ubuntu becomes the only operating system on the drive.",
+          },
+          {
+            type: "p",
+            text: "Important: this permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else before continuing.",
+          },
+          {
+            type: "p",
+            text: "If you want to keep your existing operating system and choose between the two each time you start your computer, that's dual-boot — a different process with its own separate guide, not covered by this walkthrough.",
+          },
+          {
+            type: "checklist",
+            items: [
+              'Select "Erase disk and install Ubuntu" (or equivalent) and continue',
+            ],
+          },
+        ],
+      },
+      {
+        title: "Follow the installer prompts",
+        summary:
+          "Set your language, keyboard, timezone, and account — then let it install.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Select your language and keyboard layout",
+              "Confirm your timezone (usually auto-detected from your internet connection)",
+              "Create your account: a name, a computer name, a username, and a password",
+            ],
+          },
+          {
+            type: "p",
+            text: "Remember your password — it's what you'll use both to log in and for sudo afterward.",
+          },
+          {
+            type: "p",
+            text: "After confirming these, the installer starts copying files — this typically takes 10-20 minutes. You can just wait.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Restart when prompted, and remove the USB drive as the screen goes black — leaving it in can boot you back into the installer instead of your new system",
+            ],
+          },
+        ],
+      },
+      {
+        title: "First boot and updates",
+        summary:
+          "What to do in the first few minutes after your new install starts up.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Log in with the password you set during install",
+              "Open Software Updater and install everything it lists",
+            ],
+          },
+          {
+            type: "p",
+            text: "That's the full install, start to finish. From here, the Learn section's lessons and the Search page pick up exactly where this leaves off.",
+          },
+        ],
+      },
+    ],
+    related: [
+      {
+        href: "learn.html?topic=terminal-basics",
+        label: "Next: what a terminal actually is →",
+      },
+    ],
+  },
+  {
+    slug: "fedora",
+    name: "Fedora",
+    accent: "#4a7fc9",
+    tagline: "Modern, polished, and close to upstream",
+    summary: "Full install walkthrough, start to finish.",
+    steps: [
+      {
+        title: "Download the ISO",
+        summary: "Grab the Fedora Workstation installer file from the official site.",
+        detail: [
+          {
+            type: "p",
+            text: "Fedora Workstation is the desktop edition you want here — Fedora also makes server and specialized editions, but Workstation is the general-purpose one.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Go to getfedora.org/en/workstation/download/",
+              "Click Download — the file that comes down is the ISO (typically 2GB)",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Don't extract or open the ISO after downloading — it gets used as-is in the next step.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Create a bootable USB",
+        summary:
+          "Turn a USB drive into something your computer can install Fedora from.",
+        detail: [
+          {
+            type: "p",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the Fedora ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
+            ],
+          },
+          {
+            type: "p",
+            text: "When it finishes, Etcher will say the flash succeeded and safely eject the drive. Leave it plugged in — you'll boot from it in the next step.",
+          },
+        ],
+      },
+      {
+        title: "Boot into the installer",
+        summary:
+          "Restart your computer and start up from the USB instead of your normal operating system.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              'Select your USB drive from the boot menu (it\'ll show the drive\'s brand name, not "Fedora")',
+              'Double-click the "Install to Hard Drive" icon on the desktop that appears',
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Dell: F12",
+              "HP: F9 or Esc",
+              "Lenovo: F12 or the Novo button",
+              "ASUS: F8 or Esc",
+              "Acer: F12",
+              "Mac: hold Option/Alt at startup",
+            ],
+          },
+          {
+            type: "p",
+            text: "If you're not sure which key, watch closely during the very first second of startup — many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
+          },
+        ],
+      },
+      {
+        title: "Choose how to install",
+        summary: "Decide whether Fedora replaces your current OS or lives alongside it.",
+        detail: [
+          {
+            type: "p",
+            text: "Fedora's installer (called Anaconda) will ask you to choose an installation destination. This checklist covers the full, single-OS install — where Fedora becomes the only operating system on the drive.",
+          },
+          {
+            type: "p",
+            text: "Important: this permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else before continuing.",
+          },
+          {
+            type: "p",
+            text: "If you want to keep your existing operating system and choose between the two each time you start your computer, that's dual-boot — a different process with its own separate guide, not covered by this walkthrough.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Select your drive, choose the Automatic partitioning option, and confirm",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Follow the installer prompts",
+        summary: "Set your language, timezone, and account — then let it install.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Select your language",
+              "Confirm your timezone and keyboard layout",
+              "Create your account: your full name, a username, and a password",
+            ],
+          },
+          {
+            type: "p",
+            text: "Remember your password — it's what you'll use both to log in and for sudo afterward.",
+          },
+          {
+            type: "p",
+            text: "After confirming these, click Begin Installation — this typically takes 10-20 minutes. You can just wait.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Restart when prompted, and remove the USB drive as the screen goes black — leaving it in can boot you back into the installer instead of your new system",
+            ],
+          },
+        ],
+      },
+      {
+        title: "First boot and updates",
+        summary:
+          "What to do in the first few minutes after your new install starts up.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Log in with the password you set during install",
+              "Open Software (GNOME Software) and check the Updates tab, then install everything it lists",
+            ],
+          },
+          {
+            type: "p",
+            text: "That's the full install, start to finish. From here, the Learn section's lessons and the Search page pick up exactly where this leaves off.",
+          },
+        ],
+      },
+    ],
+    related: [
+      {
+        href: "learn.html?topic=terminal-basics",
+        label: "Next: what a terminal actually is →",
+      },
+    ],
+  },
+  {
+    slug: "kubuntu",
+    name: "Kubuntu",
+    accent: "#9b7fd4",
+    tagline: "Windows-like customization via KDE Plasma",
+    summary: "Full install walkthrough, start to finish.",
+    steps: [
+      {
+        title: "Download the ISO",
+        summary: "Grab the Kubuntu installer file from the official site.",
+        detail: [
+          {
+            type: "p",
+            text: "Kubuntu is Ubuntu with the KDE Plasma desktop instead of GNOME — same underlying system, different look and feel. There's just one main download.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Go to kubuntu.org/getkubuntu/",
+              "Click Download — the file that comes down is the ISO (typically 3-4GB)",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Don't extract or open the ISO after downloading — it gets used as-is in the next step.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Create a bootable USB",
+        summary:
+          "Turn a USB drive into something your computer can install Kubuntu from.",
+        detail: [
+          {
+            type: "p",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the Kubuntu ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
+            ],
+          },
+          {
+            type: "p",
+            text: "When it finishes, Etcher will say the flash succeeded and safely eject the drive. Leave it plugged in — you'll boot from it in the next step.",
+          },
+        ],
+      },
+      {
+        title: "Boot into the installer",
+        summary:
+          "Restart your computer and start up from the USB instead of your normal operating system.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              'Select your USB drive from the boot menu (it\'ll show the drive\'s brand name, not "Kubuntu")',
+              'Double-click the "Install Kubuntu" icon on the desktop that appears',
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Dell: F12",
+              "HP: F9 or Esc",
+              "Lenovo: F12 or the Novo button",
+              "ASUS: F8 or Esc",
+              "Acer: F12",
+              "Mac: hold Option/Alt at startup",
+            ],
+          },
+          {
+            type: "p",
+            text: "If you're not sure which key, watch closely during the very first second of startup — many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
+          },
+        ],
+      },
+      {
+        title: "Choose how to install",
+        summary:
+          "Decide whether Kubuntu replaces your current OS or lives alongside it.",
+        detail: [
+          {
+            type: "p",
+            text: "During the installer, you'll reach a screen asking how to install. This checklist covers the full, single-OS install — where Kubuntu becomes the only operating system on the drive.",
+          },
+          {
+            type: "p",
+            text: "Important: this permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else before continuing.",
+          },
+          {
+            type: "p",
+            text: "If you want to keep your existing operating system and choose between the two each time you start your computer, that's dual-boot — a different process with its own separate guide, not covered by this walkthrough.",
+          },
+          {
+            type: "checklist",
+            items: [
+              'Select "Erase disk and install Kubuntu" (or equivalent) and continue',
+            ],
+          },
+        ],
+      },
+      {
+        title: "Follow the installer prompts",
+        summary:
+          "Set your language, keyboard, timezone, and account — then let it install.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Select your language and click Continue",
+              "Select your keyboard layout and click Continue",
+              "Confirm your timezone (usually auto-detected from your internet connection)",
+              "Create your account: a name, a computer name, a username, and a password",
+            ],
+          },
+          {
+            type: "p",
+            text: "Remember your password — it's what you'll use both to log in and for sudo afterward.",
+          },
+          {
+            type: "p",
+            text: "After confirming these, the installer starts copying files — this typically takes 10-20 minutes. You can just wait.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Restart when prompted, and remove the USB drive as the screen goes black — leaving it in can boot you back into the installer instead of your new system",
+            ],
+          },
+        ],
+      },
+      {
+        title: "First boot and updates",
+        summary:
+          "What to do in the first few minutes after your new install starts up.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Log in with the password you set during install",
+              "Open Discover (KDE's software center) and check the Updates tab, then install everything it lists",
+            ],
+          },
+          {
+            type: "p",
+            text: "That's the full install, start to finish. From here, the Learn section's lessons and the Search page pick up exactly where this leaves off.",
+          },
+        ],
+      },
+    ],
+    related: [
+      {
+        href: "learn.html?topic=terminal-basics",
+        label: "Next: what a terminal actually is →",
+      },
+    ],
+  },
+  {
+    slug: "elementary-os",
+    name: "elementary OS",
+    accent: "#ec6fa8",
+    tagline: "Clean, Mac-like design and polish",
+    summary: "Full install walkthrough, start to finish.",
+    steps: [
+      {
+        title: "Download the ISO",
+        summary:
+          "Grab the elementary OS installer file from the official site — it's free, even though the page shows a price slider.",
+        detail: [
+          {
+            type: "p",
+            text: "elementary OS uses a \"pay what you want\" download page, including $0 — it is not required to pay anything. This trips people up, so it's worth calling out clearly before you get there.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Go to elementary.io",
+              "Click Download elementary OS",
+              "On the payment slider, drag it down to $0 (or type 0) if you don't want to pay",
+              "Click Download Now — the file that comes down is the ISO (typically 2-3GB)",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Don't extract or open the ISO after downloading — it gets used as-is in the next step.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Create a bootable USB",
+        summary:
+          "Turn a USB drive into something your computer can install elementary OS from.",
+        detail: [
+          {
+            type: "p",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the elementary OS ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
+            ],
+          },
+          {
+            type: "p",
+            text: "When it finishes, Etcher will say the flash succeeded and safely eject the drive. Leave it plugged in — you'll boot from it in the next step.",
+          },
+        ],
+      },
+      {
+        title: "Boot into the installer",
+        summary:
+          "Restart your computer and start up from the USB instead of your normal operating system.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              'Select your USB drive from the boot menu (it\'ll show the drive\'s brand name, not "elementary")',
+              'Double-click the "Install elementary OS" icon on the desktop that appears',
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Dell: F12",
+              "HP: F9 or Esc",
+              "Lenovo: F12 or the Novo button",
+              "ASUS: F8 or Esc",
+              "Acer: F12",
+              "Mac: hold Option/Alt at startup",
+            ],
+          },
+          {
+            type: "p",
+            text: "If you're not sure which key, watch closely during the very first second of startup — many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
+          },
+        ],
+      },
+      {
+        title: "Choose how to install",
+        summary:
+          "Decide whether elementary OS replaces your current OS or lives alongside it.",
+        detail: [
+          {
+            type: "p",
+            text: "During the installer, you'll reach a screen asking how to install. This checklist covers the full, single-OS install — where elementary OS becomes the only operating system on the drive.",
+          },
+          {
+            type: "p",
+            text: "Important: this permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else before continuing.",
+          },
+          {
+            type: "p",
+            text: "If you want to keep your existing operating system and choose between the two each time you start your computer, that's dual-boot — a different process with its own separate guide, not covered by this walkthrough.",
+          },
+          {
+            type: "checklist",
+            items: [
+              'Select "Erase Disk and Install" (or equivalent) and continue',
+            ],
+          },
+        ],
+      },
+      {
+        title: "Follow the installer prompts",
+        summary:
+          "Set your language, keyboard, timezone, and account — then let it install.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Select your language and keyboard layout",
+              "Confirm your timezone (usually auto-detected from your internet connection)",
+              "Create your account: your name, a username, and a password",
+            ],
+          },
+          {
+            type: "p",
+            text: "Remember your password — it's what you'll use both to log in and for sudo afterward.",
+          },
+          {
+            type: "p",
+            text: "After confirming these, the installer starts copying files — this typically takes 10-20 minutes. You can just wait.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Restart when prompted, and remove the USB drive as the screen goes black — leaving it in can boot you back into the installer instead of your new system",
+            ],
+          },
+        ],
+      },
+      {
+        title: "First boot and updates",
+        summary:
+          "What to do in the first few minutes after your new install starts up.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Log in with the password you set during install",
+              "Open AppCenter (elementary's software center) and check for updates, then install everything it lists",
+            ],
+          },
+          {
+            type: "p",
+            text: "That's the full install, start to finish. From here, the Learn section's lessons and the Search page pick up exactly where this leaves off.",
+          },
+        ],
+      },
+    ],
+    related: [
+      {
+        href: "learn.html?topic=terminal-basics",
+        label: "Next: what a terminal actually is →",
+      },
+    ],
+  },
+  {
+    slug: "linux-lite",
+    name: "Linux Lite",
+    accent: "#d4574f",
+    tagline: "Built for Windows XP/7 switchers on older hardware",
+    summary: "Full install walkthrough, start to finish.",
+    steps: [
+      {
+        title: "Download the ISO",
+        summary: "Grab the Linux Lite installer file from the official site.",
+        detail: [
+          {
+            type: "p",
+            text: "Linux Lite is built specifically for people switching from older versions of Windows on lower-spec hardware — there's just one main edition, no picking between desktop environments.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Go to linuxliteos.com/download.php",
+              "Click the current release's download link — the file that comes down is the ISO (typically 1.5-2GB)",
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Don't extract or open the ISO after downloading — it gets used as-is in the next step.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Create a bootable USB",
+        summary:
+          "Turn a USB drive into something your computer can install Linux Lite from.",
+        detail: [
+          {
+            type: "p",
+            text: "You'll need a USB drive that's at least 4GB (8GB+ is safer) — back up anything on it first, since this process erases it completely.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Download balenaEtcher from balena.io/etcher and install it",
+              'Open Etcher, click "Flash from file", and select the Linux Lite ISO you downloaded',
+              'Click "Select target" and choose your USB drive — double-check you\'ve picked the right one, since this step erases it',
+              'Click "Flash!" and wait (usually 5-15 minutes depending on the USB drive\'s speed)',
+            ],
+          },
+          {
+            type: "p",
+            text: "When it finishes, Etcher will say the flash succeeded and safely eject the drive. Leave it plugged in — you'll boot from it in the next step.",
+          },
+        ],
+      },
+      {
+        title: "Boot into the installer",
+        summary:
+          "Restart your computer and start up from the USB instead of your normal operating system.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Restart your computer with the USB still plugged in",
+              "Press your boot-menu key during startup (see the list below for your computer's brand)",
+              'Select your USB drive from the boot menu (it\'ll show the drive\'s brand name, not "Linux Lite")',
+              'Double-click the "Install Linux Lite" icon on the desktop that appears',
+            ],
+          },
+          {
+            type: "list",
+            items: [
+              "Dell: F12",
+              "HP: F9 or Esc",
+              "Lenovo: F12 or the Novo button",
+              "ASUS: F8 or Esc",
+              "Acer: F12",
+              "Mac: hold Option/Alt at startup",
+            ],
+          },
+          {
+            type: "p",
+            text: "If you're not sure which key, watch closely during the very first second of startup — many computers briefly flash a message like \"Press F12 for boot menu\" before it's covered by the manufacturer's logo. If you miss it, just restart and try again.",
+          },
+        ],
+      },
+      {
+        title: "Choose how to install",
+        summary:
+          "Decide whether Linux Lite replaces your current OS or lives alongside it.",
+        detail: [
+          {
+            type: "p",
+            text: "During the installer, you'll reach a screen asking how to install. This checklist covers the full, single-OS install — where Linux Lite becomes the only operating system on the drive.",
+          },
+          {
+            type: "p",
+            text: "Important: this permanently erases everything currently on that drive. Make sure anything you want to keep is backed up somewhere else before continuing.",
+          },
+          {
+            type: "p",
+            text: "If you want to keep your existing operating system and choose between the two each time you start your computer, that's dual-boot — a different process with its own separate guide, not covered by this walkthrough.",
+          },
+          {
+            type: "checklist",
+            items: [
+              'Select "Erase disk and install Linux Lite" (or equivalent) and continue',
+            ],
+          },
+        ],
+      },
+      {
+        title: "Follow the installer prompts",
+        summary:
+          "Set your language, keyboard, timezone, and account — then let it install.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Select your language and click Continue",
+              "Select your keyboard layout and click Continue",
+              "Confirm your timezone (usually auto-detected from your internet connection)",
+              "Create your account: a name, a computer name, a username, and a password",
+            ],
+          },
+          {
+            type: "p",
+            text: "Remember your password — it's what you'll use both to log in and for sudo afterward.",
+          },
+          {
+            type: "p",
+            text: "After confirming these, the installer starts copying files — this typically takes 10-20 minutes. You can just wait.",
+          },
+          {
+            type: "checklist",
+            items: [
+              "Restart when prompted, and remove the USB drive as the screen goes black — leaving it in can boot you back into the installer instead of your new system",
+            ],
+          },
+        ],
+      },
+      {
+        title: "First boot and updates",
+        summary:
+          "What to do in the first few minutes after your new install starts up.",
+        detail: [
+          {
+            type: "checklist",
+            items: [
+              "Log in with the password you set during install",
+              "Go through Lite Welcome, a built-in getting-started app that opens automatically on first login",
+              "Open the Software Updater and install everything it lists",
+            ],
           },
           {
             type: "p",
