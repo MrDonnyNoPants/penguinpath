@@ -7,50 +7,68 @@ function trackEvent(path) {
 }
 
 function getGuideBySlug(slug) {
-    return INSTALL_GUIDES.find((g) => g.slug === slug);
+  return INSTALL_GUIDES.find((g) => g.slug === slug);
 }
 
 function getProgress(slug) {
   try {
     const raw = JSON.parse(localStorage.getItem(`install-progress-${slug}`));
-    return { steps: (raw && raw.steps) || [], substeps: (raw && raw.substeps) || {} };
+    const steps = Array.isArray(raw && raw.steps) ? raw.steps : [];
+    const rawSubsteps =
+      raw && raw.substeps && typeof raw.substeps === "object" && !Array.isArray(raw.substeps)
+        ? raw.substeps
+        : {};
+    const substeps = {};
+    for (const key of Object.keys(rawSubsteps)) {
+      substeps[key] = Array.isArray(rawSubsteps[key]) ? rawSubsteps[key] : [];
+    }
+    return { steps, substeps };
   } catch {
     return { steps: [], substeps: {} };
   }
 }
 
 function saveProgress(slug, progress) {
-  localStorage.setItem(`install-progress-${slug}`, JSON.stringify(progress));
+  try {
+    localStorage.setItem(`install-progress-${slug}`, JSON.stringify(progress));
+  } catch {
+    // ignore storage failures (quota exceeded, disabled, etc.)
+  }
 }
 
-function countChecklistItems(step) {
+function getAllChecklistItemTexts(step) {
   return step.detail
     .filter((block) => block.type === "checklist")
-    .reduce((sum, block) => sum + block.items.length, 0);
+    .flatMap((block) => block.items);
 }
 
-function isStepChecked(progress, stepIndex) {
-  return progress.steps.includes(stepIndex);
+function isStepChecked(progress, stepKey) {
+  return progress.steps.includes(stepKey);
 }
 
-function getCheckedSubItems(progress, stepIndex) {
-  return progress.substeps[stepIndex] || [];
+function getCheckedSubItems(progress, stepKey) {
+  return progress.substeps[stepKey] || [];
 }
 
-function updateProgressNote(progressNote, guideSlug, totalSteps) {
-  const doneCount = getProgress(guideSlug).steps.length;
-  progressNote.textContent = `${doneCount} of ${totalSteps} steps done`;
+function updateProgressNote(progressNote, guideSlug, guideSteps) {
+  const validTitles = new Set(guideSteps.map((s) => s.title));
+  const doneCount = getProgress(guideSlug).steps.filter((key) => validTitles.has(key)).length;
+  progressNote.textContent = `${doneCount} of ${guideSteps.length} steps done`;
 }
 
-function buildStepRow(step, index, guideSlug, progressNote, totalSteps) {
+function buildStepRow(step, index, guideSlug, progressNote, guideSteps) {
+  const stepKey = step.title;
+
   const row = document.createElement("div");
   row.className = "step-row";
 
   const summary = document.createElement("div");
   summary.className = "step-summary";
 
-  const main = document.createElement("div");
+  const main = document.createElement("button");
+  main.type = "button";
   main.className = "step-summary-main";
+  main.setAttribute("aria-expanded", "false");
 
   const number = document.createElement("span");
   number.className = "step-number";
@@ -59,7 +77,11 @@ function buildStepRow(step, index, guideSlug, progressNote, totalSteps) {
 
   const text = document.createElement("span");
   text.className = "step-text";
-  text.innerHTML = `<strong>${step.title}</strong><br>${step.summary}`;
+  const titleEl = document.createElement("strong");
+  titleEl.textContent = step.title;
+  text.appendChild(titleEl);
+  text.appendChild(document.createElement("br"));
+  text.appendChild(document.createTextNode(step.summary));
   main.appendChild(text);
 
   summary.appendChild(main);
@@ -77,8 +99,8 @@ function buildStepRow(step, index, guideSlug, progressNote, totalSteps) {
   detail.hidden = true;
 
   const subCheckboxes = [];
-  const totalSubItems = countChecklistItems(step);
-  let nextItemIndex = 0;
+  const allItemTexts = getAllChecklistItemTexts(step);
+  const totalSubItems = allItemTexts.length;
 
   step.detail.forEach((block) => {
     if (block.type === "p") {
@@ -97,7 +119,6 @@ function buildStepRow(step, index, guideSlug, progressNote, totalSteps) {
       const ul = document.createElement("ul");
       ul.className = "sub-checklist";
       block.items.forEach((item) => {
-        const itemIndex = nextItemIndex++;
         const li = document.createElement("li");
         li.className = "sub-checklist-item";
 
@@ -112,7 +133,7 @@ function buildStepRow(step, index, guideSlug, progressNote, totalSteps) {
 
         subCheck.addEventListener("click", (evt) => {
           evt.stopPropagation();
-          toggleSubItem(itemIndex);
+          toggleSubItem(item);
         });
         subCheck.addEventListener("keydown", (evt) => {
           if (evt.key === "Enter" || evt.key === " ") evt.stopPropagation();
@@ -121,7 +142,7 @@ function buildStepRow(step, index, guideSlug, progressNote, totalSteps) {
         li.appendChild(subCheck);
         li.appendChild(subText);
         ul.appendChild(li);
-        subCheckboxes.push({ el: subCheck, li, itemIndex });
+        subCheckboxes.push({ el: subCheck, li, itemText: item });
       });
       detail.appendChild(ul);
     }
@@ -131,15 +152,15 @@ function buildStepRow(step, index, guideSlug, progressNote, totalSteps) {
 
   function refreshFromProgress() {
     const progress = getProgress(guideSlug);
-    const stepDone = isStepChecked(progress, index);
-    const checkedSubs = getCheckedSubItems(progress, index);
+    const stepDone = isStepChecked(progress, stepKey);
+    const checkedSubs = getCheckedSubItems(progress, stepKey);
 
     check.classList.toggle("checked", stepDone);
     check.setAttribute("aria-pressed", String(stepDone));
     row.classList.toggle("done", stepDone);
 
-    subCheckboxes.forEach(({ el, li, itemIndex }) => {
-      const isChecked = checkedSubs.includes(itemIndex);
+    subCheckboxes.forEach(({ el, li, itemText }) => {
+      const isChecked = checkedSubs.includes(itemText);
       el.classList.toggle("checked", isChecked);
       el.setAttribute("aria-pressed", String(isChecked));
       li.classList.toggle("checked", isChecked);
@@ -150,39 +171,39 @@ function buildStepRow(step, index, guideSlug, progressNote, totalSteps) {
     const progress = getProgress(guideSlug);
     const steps = new Set(progress.steps);
     if (nextChecked) {
-      steps.add(index);
-      progress.substeps[index] = Array.from({ length: totalSubItems }, (_, i) => i);
+      steps.add(stepKey);
+      progress.substeps[stepKey] = [...allItemTexts];
     } else {
-      steps.delete(index);
-      progress.substeps[index] = [];
+      steps.delete(stepKey);
+      progress.substeps[stepKey] = [];
     }
     progress.steps = Array.from(steps);
     saveProgress(guideSlug, progress);
     refreshFromProgress();
-    updateProgressNote(progressNote, guideSlug, totalSteps);
+    updateProgressNote(progressNote, guideSlug, guideSteps);
   }
 
-  function toggleSubItem(itemIndex) {
+  function toggleSubItem(itemText) {
     const progress = getProgress(guideSlug);
-    const current = new Set(getCheckedSubItems(progress, index));
-    if (current.has(itemIndex)) {
-      current.delete(itemIndex);
+    const current = new Set(getCheckedSubItems(progress, stepKey));
+    if (current.has(itemText)) {
+      current.delete(itemText);
     } else {
-      current.add(itemIndex);
+      current.add(itemText);
     }
-    progress.substeps[index] = Array.from(current);
+    progress.substeps[stepKey] = Array.from(current);
 
     const steps = new Set(progress.steps);
     if (totalSubItems > 0 && current.size === totalSubItems) {
-      steps.add(index);
+      steps.add(stepKey);
     } else {
-      steps.delete(index);
+      steps.delete(stepKey);
     }
     progress.steps = Array.from(steps);
 
     saveProgress(guideSlug, progress);
     refreshFromProgress();
-    updateProgressNote(progressNote, guideSlug, totalSteps);
+    updateProgressNote(progressNote, guideSlug, guideSteps);
   }
 
   check.addEventListener("click", (evt) => {
@@ -195,23 +216,13 @@ function buildStepRow(step, index, guideSlug, progressNote, totalSteps) {
 
   refreshFromProgress();
 
-  row.tabIndex = 0;
-  row.setAttribute("role", "button");
-  row.setAttribute("aria-expanded", "false");
-
   function toggleOpen() {
     const open = row.classList.toggle("open");
-    row.setAttribute("aria-expanded", String(open));
+    main.setAttribute("aria-expanded", String(open));
     detail.hidden = !open;
   }
 
-  row.addEventListener("click", () => toggleOpen());
-  row.addEventListener("keydown", (evt) => {
-    if (evt.key === "Enter" || evt.key === " ") {
-      evt.preventDefault();
-      toggleOpen();
-    }
-  });
+  main.addEventListener("click", () => toggleOpen());
 
   return row;
 }
@@ -259,11 +270,11 @@ function renderGuide(guide) {
   const list = document.createElement("div");
   list.className = "step-list";
   guide.steps.forEach((step, i) =>
-    list.appendChild(buildStepRow(step, i, guide.slug, progressNote, guide.steps.length))
+    list.appendChild(buildStepRow(step, i, guide.slug, progressNote, guide.steps))
   );
   mount.appendChild(list);
 
-  updateProgressNote(progressNote, guide.slug, guide.steps.length);
+  updateProgressNote(progressNote, guide.slug, guide.steps);
 
   if (guide.related && guide.related.length) {
     const relatedBox = document.createElement("div");
@@ -295,12 +306,19 @@ function renderHub() {
 
   const grid = document.createElement("div");
   grid.className = "guide-grid";
-  INSTALL_GUIDES.forEach((guide) => {
+  INSTALL_GUIDES.filter((guide) => guide.featured).forEach((guide) => {
     const card = document.createElement("a");
     card.href = `install.html?os=${guide.slug}`;
     card.className = "feature-card guide-card";
     card.style.setProperty("--guide-accent", guide.accent);
-    card.innerHTML = `<h3>${guide.name}</h3><p>${guide.tagline}</p>`;
+
+    const cardTitle = document.createElement("h3");
+    cardTitle.textContent = guide.name;
+    const cardTagline = document.createElement("p");
+    cardTagline.textContent = guide.tagline;
+    card.appendChild(cardTitle);
+    card.appendChild(cardTagline);
+
     grid.appendChild(card);
   });
   mount.appendChild(grid);

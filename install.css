@@ -159,7 +159,6 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 14px 18px;
-  cursor: pointer;
   transition: border-color 0.15s ease;
 }
 
@@ -167,7 +166,7 @@
   border-color: var(--accent-dim);
 }
 
-.step-row:focus-visible {
+.step-row:focus-within {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -187,6 +186,15 @@
   display: flex;
   align-items: flex-start;
   gap: 14px;
+  flex: 1;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
 .step-number {
