@@ -290,6 +290,22 @@ function renderGuide(guide) {
   }
 }
 
+function buildGuideCard(guide) {
+  const card = document.createElement("a");
+  card.href = `install.html?os=${guide.slug}`;
+  card.className = "feature-card guide-card";
+  card.style.setProperty("--guide-accent", guide.accent);
+
+  const cardTitle = document.createElement("h3");
+  cardTitle.textContent = guide.name;
+  const cardTagline = document.createElement("p");
+  cardTagline.textContent = guide.tagline;
+  card.appendChild(cardTitle);
+  card.appendChild(cardTagline);
+
+  return card;
+}
+
 function renderHub() {
   mount.innerHTML = "";
   trackEvent("/install");
@@ -301,27 +317,75 @@ function renderHub() {
   const hubNote = document.createElement("p");
   hubNote.className = "hub-note";
   hubNote.textContent =
-    "These are the most beginner-friendly picks. More advanced and niche distros will be searchable here soon.";
+    "These are the most beginner-friendly picks. Search below to browse the full library.";
   mount.appendChild(hubNote);
 
   const grid = document.createElement("div");
   grid.className = "guide-grid";
   INSTALL_GUIDES.filter((guide) => guide.featured).forEach((guide) => {
-    const card = document.createElement("a");
-    card.href = `install.html?os=${guide.slug}`;
-    card.className = "feature-card guide-card";
-    card.style.setProperty("--guide-accent", guide.accent);
-
-    const cardTitle = document.createElement("h3");
-    cardTitle.textContent = guide.name;
-    const cardTagline = document.createElement("p");
-    cardTagline.textContent = guide.tagline;
-    card.appendChild(cardTitle);
-    card.appendChild(cardTagline);
-
-    grid.appendChild(card);
+    grid.appendChild(buildGuideCard(guide));
   });
   mount.appendChild(grid);
+
+  const searchHeading = document.createElement("h2");
+  searchHeading.className = "hub-search-heading";
+  searchHeading.textContent = "Browse all distros";
+  mount.appendChild(searchHeading);
+
+  const searchNote = document.createElement("p");
+  searchNote.className = "hub-note";
+  searchNote.textContent = `Search all ${INSTALL_GUIDES.length} guides by name or what they're good for (e.g. "gaming", "lightweight", "Arch").`;
+  mount.appendChild(searchNote);
+
+  const searchRow = document.createElement("div");
+  searchRow.className = "hub-search-row";
+  const searchInput = document.createElement("input");
+  searchInput.type = "text";
+  searchInput.id = "hub-search";
+  searchInput.placeholder = "Search distros...";
+  searchInput.setAttribute("aria-label", "Search all distros");
+  searchRow.appendChild(searchInput);
+  mount.appendChild(searchRow);
+
+  const resultsCount = document.createElement("p");
+  resultsCount.className = "hub-note hub-results-count";
+  mount.appendChild(resultsCount);
+
+  const resultsGrid = document.createElement("div");
+  resultsGrid.className = "guide-grid guide-grid-compact";
+  mount.appendChild(resultsGrid);
+
+  const allGuidesSorted = [...INSTALL_GUIDES].sort((a, b) => a.name.localeCompare(b.name));
+
+  function renderResults(query) {
+    const normalized = query.trim().toLowerCase();
+    const matches = normalized
+      ? allGuidesSorted.filter(
+          (guide) =>
+            guide.name.toLowerCase().includes(normalized) ||
+            guide.tagline.toLowerCase().includes(normalized)
+        )
+      : allGuidesSorted;
+
+    resultsCount.textContent = normalized
+      ? `${matches.length} of ${INSTALL_GUIDES.length} distros match "${query.trim()}"`
+      : `Showing all ${INSTALL_GUIDES.length} distros`;
+
+    resultsGrid.innerHTML = "";
+    if (matches.length === 0) {
+      const emptyNote = document.createElement("p");
+      emptyNote.className = "hub-note";
+      emptyNote.textContent = "No distros match that search.";
+      resultsGrid.appendChild(emptyNote);
+      return;
+    }
+    matches.forEach((guide) => {
+      resultsGrid.appendChild(buildGuideCard(guide));
+    });
+  }
+
+  searchInput.addEventListener("input", () => renderResults(searchInput.value));
+  renderResults("");
 }
 
 function render() {
